@@ -8,10 +8,12 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('home');
-})->name('home')->middleware('auth');
+})->name('home')->middleware('auth', 'verified');
 
-Route::view('/profile/edit', 'profile.edit')->middleware('auth')->name('profile.edit');
-Route::view('/profile/password', 'profile.password')->middleware('auth')->name('profile.password');
+Route::view('/profile/edit', 'profile.edit')->middleware('auth', 'verified')->name('profile.edit');
+Route::view('/profile/password', 'profile.password')->middleware('auth', 'verified')->name('profile.password');
+
+
 
 // Route::get('/login', function () {
 //     return view('auth.login');
