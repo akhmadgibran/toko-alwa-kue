@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         //
         // register middleware here after making for route 
         $middleware->alias([
+            'superadmin' => \App\Http\Middleware\SuperadminMiddleware::class,
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'costumer' => \App\Http\Middleware\CostumerMiddleware::class
         ]);

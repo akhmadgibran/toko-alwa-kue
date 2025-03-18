@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
         // Route::put('/product/{id}', 'update')->name('admin.product.update');
         Route::put('/product/{id}', 'update')->name('admin.product.update');
         Route::delete('/product/{id}', 'destroy')->name('admin.product.destroy');
+    });
+});
+
+Route::middleware(['auth', 'superadmin'])->group(function () {
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/admin', 'index')->name('superadmin.admin.index');
+        Route::get('/admin/create', 'create')->name('superadmin.admin.create');
+        Route::post('/admin', 'store')->name('superadmin.admin.store');
+        Route::get('/admin/{id}/edit', 'edit')->name('superadmin.admin.edit');
+        Route::put('/admin/{id}', 'update')->name('superadmin.admin.update');
+        Route::delete('/admin/{id}', 'destroy')->name('superadmin.admin.destroy');
     });
 });
 
