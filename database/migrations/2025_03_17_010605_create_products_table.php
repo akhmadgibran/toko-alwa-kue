@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('image_path');
-            $table->integer('price');
             $table->integer('category_id')->references('id')->on('product_categories');
+            $table->integer('price');
+            $table->string('image_path');
+
+
             $table->timestamps();
         });
     }

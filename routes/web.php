@@ -40,11 +40,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/product', 'adminIndex')->name('admin.product.index');
         Route::get('/product/create', 'create')->name('admin.product.create');
         Route::post('/product', 'store')->name('admin.product.store');
-        Route::get('/product/{product}/edit', 'edit')->name('admin.product.edit');
-        Route::put('/product/{product}', 'update')->name('admin.product.update');
-        Route::delete('/product/{product}', 'destroy')->name('admin.product.destroy');
+        Route::get('/product/{id}/edit', 'edit')->name('admin.product.edit');
+        // Route::put('/product/{id}', 'update')->name('admin.product.update');
+        Route::put('/product/{id}', 'update')->name('admin.product.update');
+        Route::delete('/product/{id}', 'destroy')->name('admin.product.destroy');
     });
 });
+
+Route::put('/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
 
 // Route::get('/login', function () {
 //     return view('auth.login');

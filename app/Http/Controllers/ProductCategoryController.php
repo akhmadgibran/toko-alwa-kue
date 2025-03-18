@@ -28,6 +28,7 @@ class ProductCategoryController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -44,7 +45,7 @@ class ProductCategoryController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        return response()->json(['message' => 'Product category created successfully']);
+        return redirect()->route('admin.category.index')->with('success', 'Product category created successfully');
     }
 
 
@@ -88,7 +89,7 @@ class ProductCategoryController extends Controller
             'image_path' => $productCategory->image_path,
         ]);
 
-        return response()->json(['message' => 'Product category updated successfully']);
+        return redirect()->route('admin.category.index')->with('success', 'Product category updated successfully');
     }
 
 
@@ -102,6 +103,6 @@ class ProductCategoryController extends Controller
 
         $productCategory->delete();
 
-        return response()->json(['message' => 'Product category deleted successfully']);
+        return redirect()->route('admin.category.index')->with('success', 'Product category deleted successfully');
     }
 }

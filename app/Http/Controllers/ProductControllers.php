@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Storage;
 
-class ProductController extends Controller
+class ProductControllers extends Controller
 {
-    //
+    //index admin
     public function adminIndex()
     {
         // retrieve all product
@@ -62,8 +62,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        $categories = ProductCategory::all();
-        return view('admin.product.edit', compact(['product', 'categories']));
+        return view('admin.product.edit', compact('product'));
     }
 
     // update
@@ -92,7 +91,6 @@ class ProductController extends Controller
 
         $product->update($validatedData);
 
-        // return response()->json([$product, $request->all()]);
 
         return redirect()->route('admin.product.index')->with('success', 'Product updated successfully!');
     }
