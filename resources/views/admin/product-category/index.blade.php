@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">Product Categories</div>
                 {{-- to create page small button --}}
-                <a href="{{ route('admin.category.create') }}" class="btn btn-primary">Create</a>
+                <a href="{{ Auth::user()->usertype == 'admin' ? route('admin.category.create') : route('superadmin.category.create') }}" class="btn btn-primary">Create</a>
                 
 
                 <div class="card-body">
@@ -36,8 +36,8 @@
                                     <td>{{ $category->description }}</td>
                                     <td><img src="{{ asset('storage/' . $category->image_path) }}" alt="{{ $category->name }}"></td>
                                     <td>
-                                        <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-primary">Edit</a>
-                                        <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST" style="display: inline-block">
+                                        <a href="{{ Auth::user()->usertype == 'admin' ? route('admin.category.edit', $category->id) : route('superadmin.category.edit', $category->id) }}" class="btn btn-primary">Edit</a>
+                                        <form action="{{ Auth::user()->usertype == 'admin' ? route('admin.category.destroy', $category->id) : route('superadmin.category.destroy', $category->id) }}" method="POST" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>

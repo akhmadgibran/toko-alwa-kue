@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProductCategoryController extends Controller
@@ -45,7 +46,11 @@ class ProductCategoryController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        return redirect()->route('admin.category.index')->with('success', 'Product category created successfully');
+        if (Auth::user()->usertype == 'superadmin') {
+            return redirect()->route('superadmin.category.index')->with('success', 'Product category created successfully');
+        } else {
+            return redirect()->route('admin.category.index')->with('success', 'Product category created successfully');
+        }
     }
 
 
@@ -89,7 +94,11 @@ class ProductCategoryController extends Controller
             'image_path' => $productCategory->image_path,
         ]);
 
-        return redirect()->route('admin.category.index')->with('success', 'Product category updated successfully');
+        if (Auth::user()->usertype == "admin") {
+            return redirect()->route('admin.category.index')->with('success', 'Product category updated successfully');
+        } else {
+            return redirect()->route('superadmin.category.index')->with('success', 'Product category updated successfully');
+        }
     }
 
 
@@ -103,6 +112,10 @@ class ProductCategoryController extends Controller
 
         $productCategory->delete();
 
-        return redirect()->route('admin.category.index')->with('success', 'Product category deleted successfully');
+        if (Auth::user()->usertype == "admin") {
+            return redirect()->route('admin.category.index')->with('success', 'Product category deleted successfully');
+        } else {
+            return redirect()->route('superadmin.category.index')->with('success', 'Product category deleted successfully');
+        }
     }
 }

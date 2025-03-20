@@ -57,9 +57,28 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
         Route::put('/admin/{id}', 'update')->name('superadmin.admin.update');
         Route::delete('/admin/{id}', 'destroy')->name('superadmin.admin.destroy');
     });
+
+    Route::controller(ProductCategoryController::class)->group(function () {
+        Route::get('/superadmin/category', 'adminIndex')->name('superadmin.category.index');
+        Route::get('/superadmin/category/create', 'create')->name('superadmin.category.create');
+        Route::post('/superadmin/category', 'store')->name('superadmin.category.store');
+        Route::get('/superadmin/category/{id}/edit', 'edit')->name('superadmin.category.edit');
+        Route::put('/superadmin/category/{id}', 'update')->name('superadmin.category.update');
+        Route::delete('/superadmin/category/{id}', 'destroy')->name('superadmin.category.destroy');
+    });
+
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/superadmin/product', 'adminIndex')->name('superadmin.product.index');
+        Route::get('/superadmin/product/create', 'create')->name('superadmin.product.create');
+        Route::post('/superadmin/product', 'store')->name('superadmin.product.store');
+        Route::get('/superadmin/product/{id}/edit', 'edit')->name('superadmin.product.edit');
+        // Route::put('/product/{id}', 'update')->name('admin.product.update');
+        Route::put('/superadmin/product/{id}', 'update')->name('superadmin.product.update');
+        Route::delete('/superadmin/product/{id}', 'destroy')->name('superadmin.product.destroy');
+    });
 });
 
-Route::put('/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+// Route::put('/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
 
 // Route::get('/login', function () {
 //     return view('auth.login');

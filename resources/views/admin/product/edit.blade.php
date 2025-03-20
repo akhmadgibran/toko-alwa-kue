@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header">Edit Product</div>
             <div class="card-body">
-                <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ Auth::user()->usertype == 'admin' ? route('admin.product.update', $product->id) : route('superadmin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
