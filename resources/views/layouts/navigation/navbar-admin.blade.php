@@ -17,6 +17,11 @@
                 <li class="nav-item" >
                     <a class="nav-link" href="{{ route('admin.category.index') }}">{{ __('Kelola Kategori') }}</a>
                 </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ route('admin.shopstatus.index') }}">
+                        {{ __('Kelola Status Toko') }}
+                    </a>
+                </li>
 
             </ul>
 

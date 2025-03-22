@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopStatusController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -46,6 +47,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::put('/product/{id}', 'update')->name('admin.product.update');
         Route::delete('/product/{id}', 'destroy')->name('admin.product.destroy');
     });
+
+    Route::controller(ShopStatusController::class)->group(function () {
+        Route::get('/shopstatus', 'adminIndex')->name('admin.shopstatus.index');
+        Route::get('/shopstatus/edit', 'edit')->name('admin.shopstatus.edit');
+        Route::put('/shopstatus', 'update')->name('admin.shopstatus.update');
+    });
 });
 
 Route::middleware(['auth', 'superadmin'])->group(function () {
@@ -76,8 +83,13 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
         Route::put('/superadmin/product/{id}', 'update')->name('superadmin.product.update');
         Route::delete('/superadmin/product/{id}', 'destroy')->name('superadmin.product.destroy');
     });
-});
 
+    Route::controller(ShopStatusController::class)->group(function () {
+        Route::get('/superadmin/shopstatus', 'adminIndex')->name('superadmin.shopstatus.index');
+        Route::get('/superadmin/shopstatus/edit', 'edit')->name('superadmin.shopstatus.edit');
+        Route::put('/superadmin/shopstatus', 'update')->name('superadmin.shopstatus.update');
+    });
+});
 // Route::put('/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
 
 // Route::get('/login', function () {

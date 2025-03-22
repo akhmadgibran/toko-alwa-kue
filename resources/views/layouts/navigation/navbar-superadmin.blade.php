@@ -20,6 +20,11 @@
                 <li class="nav-item" >
                     <a class="nav-link" href="{{ route('superadmin.admin.index') }}">{{ __('Kelola Admin') }}</a>
                 </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ route('superadmin.shopstatus.index') }}">
+                        {{ __('Kelola Status Toko') }}
+                    </a>
+                </li>
 
             </ul>
 
