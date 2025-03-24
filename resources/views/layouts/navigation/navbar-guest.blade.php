@@ -1,57 +1,43 @@
-{{-- navbar for superadmin --}}
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Kue Alwa') }}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid d-flex justify-content-between align-items-center mx-5">
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+            <img src="{{ asset('logo/logo.png') }}" alt="Bootstrap" width="50" height="50">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+
+        <!-- Toggle Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item" >
-
+        <!-- Navigation Menu -->
+        <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0"> <!-- mx-auto untuk center -->
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">About</a>
+                </li>
             </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                    @endif
-
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                        <!-- Login & Register Buttons (Mobile Only) -->
+                        <div class="d-lg-none d-flex flex-column mt-3">
+                            <a href="{{ route('login') }}" class="btn btn-primary mb-2">Login</a>
+                            <a href="{{ route('register') }}" class="btn btn-success">Register</a>
                         </div>
-                    </li>
-                @endguest
-            </ul>
         </div>
+
+        {{-- Right Side Of Navbar --}}
+        {{-- button to login route --}}
+        <!-- Right Side Of Navbar (Hidden on Mobile) -->
+        <div class="d-none d-lg-flex">
+            <a href="{{ route('login') }}" class="btn btn-primary me-2">Login</a>
+            <a href="{{ route('register') }}" class="btn btn-success">Register</a>
+        </div>
+       
     </div>
 </nav>

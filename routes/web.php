@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layouts.app');
 });
+Route::get('/viewbuild', function () {
+    return view('guest');
+});
 
 // Route::get('/home', function () {
 //     return view('home');
