@@ -1,6 +1,7 @@
 #guest-hero {
     background-size: cover;
-    height: 50vh;
+    min-height: 50vh;
+    max-height: 100vh;
     position: relative;
     background-position: center center;
 }

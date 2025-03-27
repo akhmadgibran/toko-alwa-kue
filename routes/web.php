@@ -7,11 +7,17 @@ use App\Http\Controllers\ShopStatusController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('homeV2');
 });
 Route::get('/viewbuild', function () {
-    return view('guest');
+    return view('homeV2');
 });
+Route::get('/footerbuild', function () {
+    return view('layouts.footer.footer-guest-costumer');
+});
+Route::get('/home', function () {
+    return view('homeV2');
+})->name('home');
 
 // Route::get('/home', function () {
 //     return view('home');
@@ -22,15 +28,17 @@ Route::get('/viewbuild', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/home', function () {
-        return view('home');
-    });
+
     Route::view('/profile/edit', 'profile.edit')->name('profile.edit');
     Route::view('/profile/password', 'profile.password')->name('profile.password');
 });
 
 // group route usertype admin
 Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
 
     Route::controller(ProductCategoryController::class)->group(function () {
         Route::get('/category', 'adminIndex')->name('admin.category.index');
@@ -59,6 +67,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'superadmin'])->group(function () {
+
+    Route::get('/superadmin/dashboard', function () {
+        return view('superadmin.dashboard');
+    })->name('superadmin.dashboard');
+
     Route::controller(AdminController::class)->group(function () {
         Route::get('/admin', 'index')->name('superadmin.admin.index');
         Route::get('/admin/create', 'create')->name('superadmin.admin.create');

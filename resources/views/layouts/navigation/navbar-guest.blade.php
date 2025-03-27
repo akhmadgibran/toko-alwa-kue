@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
     <div class="container-fluid d-flex justify-content-between align-items-center mx-5">
         <!-- Logo -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('logo/logo.png') }}" alt="Bootstrap" width="50" height="50">
         </a>
 
@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0"> <!-- mx-auto untuk center -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Product</a>
