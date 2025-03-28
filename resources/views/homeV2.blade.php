@@ -71,11 +71,6 @@
                     <img src="{{ asset('sample/square-product.png') }}" class="img-fluid shadow"  alt="">
                 </a>
             </div>
-
-
-
-            
-
         </div>
     </div>
 </section>
