@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('address');
+            $table->integer('total_price');
+            $table->string('status')->default('Menunggu Verifikasi');
+            $table->longText('buyer_note')->nullable();
+            $table->longText('seller_note')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
