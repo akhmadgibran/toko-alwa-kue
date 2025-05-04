@@ -21,6 +21,20 @@ class ProductController extends Controller
     }
 
     // index costumer / guest
+    public function index($id)
+    {
+        // retrieve data product by category id
+        $products = Product::where('category_id', $id)->get();
+        return view('products-page', compact('products'));
+    }
+
+    // show
+    public function show($id)
+    {
+        // retriee detail of product by the recieved id
+        $product = Product::findOrFail($id);
+        return view('product-detail', compact('product'));
+    }
 
     // create
     public function create()

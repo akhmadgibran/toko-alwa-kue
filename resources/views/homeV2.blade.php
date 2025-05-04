@@ -6,7 +6,7 @@
     <div class="text-center text-white" >
         <h1>Selamat Datang di Alwa Kue</h1>
         <p>Pilih product apa hari ini ?</p>
-        <a href="" class="btn btn-primary">Product Kita</a>
+        <a href="{{ route('product.category') }}" class="btn btn-primary">Product Kita</a>
     </div>
 </section>
 {{-- end hero section --}}

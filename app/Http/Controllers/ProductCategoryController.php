@@ -19,6 +19,13 @@ class ProductCategoryController extends Controller
         return view('admin.product-category.index', compact('categories'));
     }
 
+    // index for user
+    public function index()
+    {
+        $categories = ProductCategory::all();
+        return view('product-categories-page', compact('categories'));
+    }
+
     // create view (form input)
     public function create()
     {

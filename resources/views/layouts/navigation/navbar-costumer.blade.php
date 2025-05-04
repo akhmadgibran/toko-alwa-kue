@@ -26,8 +26,12 @@
             </ul>
                         <!-- Login & Register Buttons (Mobile Only) -->
                         <div class="d-lg-none d-flex flex-column mt-3">
-                            <a href="{{ route('login') }}" class="btn btn-primary mb-2">Login</a>
-                            <a href="{{ route('register') }}" class="btn btn-success">Register</a>
+                            {{-- <a href="{{ route('login') }}" class="btn btn-primary mb-2">Login</a>
+                            <a href="{{ route('register') }}" class="btn btn-success">Register</a> --}}
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" style="width: 100%" class="btn btn-danger">Logout</button>
+                            </form>
                         </div>
         </div>
 
@@ -35,8 +39,12 @@
         {{-- button to login route --}}
         <!-- Right Side Of Navbar (Hidden on Mobile) -->
         <div class="d-none d-lg-flex">
-            <a href="{{ route('login') }}" class="btn btn-primary me-2">Login</a>
-            <a href="{{ route('register') }}" class="btn btn-success">Register</a>
+            {{-- <a href="{{ route('login') }}" class="btn btn-primary me-2">Login</a>
+            <a href="{{ route('register') }}" class="btn btn-success">Register</a> --}}
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
         </div>
        
     </div>

@@ -15,7 +15,7 @@
             @elseif (Auth::user()->usertype=='admin')
                 @include( 'layouts.navigation.navbar-admin') 
             @elseif (Auth::user()->usertype=='costumer')
-                {{-- @include() --}}
+                @include('layouts.navigation.navbar-costumer')
             @endif
         @else
             @include('layouts.navigation.navbar-guest')
@@ -30,6 +30,8 @@
         @if (Auth::check()==true)
             @if (Auth::user()->usertype=='superadmin' || Auth::user()->usertype=='admin')
                 @include('layouts.footer.footer-admin-superadmin')
+            @else
+            @include('layouts.footer.footer-guest-costumer')
             @endif
         @else
         @include('layouts.footer.footer-guest-costumer')
