@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BestSellerController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductControllers;
@@ -56,6 +57,11 @@ Route::middleware(['auth', 'costumer'])->group(function () {
         Route::post('/cart/store', 'store')->name('costumer.cart.store');
         Route::patch('/cart/{id}/quantity', 'updateQuantity')->name('costumer.cart.update');
         Route::delete('/cart/{id}', 'destroy')->name('costumer.cart.destroy');
+    });
+
+    Route::controller(CheckoutController::class)->group(function () {
+        Route::get('/checkout', 'index')->name('costumer.checkout.index');
+        Route::post('/checkout', 'store')->name('costumer.checkout.store');
     });
 });
 

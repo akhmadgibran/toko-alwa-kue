@@ -28,6 +28,8 @@
                         <div class="d-lg-none d-flex flex-column mt-3">
                             {{-- <a href="{{ route('login') }}" class="btn btn-primary mb-2">Login</a>
                             <a href="{{ route('register') }}" class="btn btn-success">Register</a> --}}
+                            <a class="btn btn-success mb-2" href="{{ route('costumer.cart.index') }}">Cart</a>
+                            <a class="btn btn-primary mb-2" href="{{ route('profile.edit') }}">Profile</a>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" style="width: 100%" class="btn btn-danger">Logout</button>
@@ -41,6 +43,11 @@
         <div class="d-none d-lg-flex">
             {{-- <a href="{{ route('login') }}" class="btn btn-primary me-2">Login</a>
             <a href="{{ route('register') }}" class="btn btn-success">Register</a> --}}
+            <a href="{{ route('costumer.cart.index') }}">
+                <img style="width: 75%" src="{{ asset('icons/mage_basket-fill.png') }}" alt="cart">
+            </a>
+            <a href="{{ route('profile.edit') }}">
+                <img style="width: 75%" src="{{ asset('icons/iconamoon_profile-circle-fill.png') }}" alt="profile"></a>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-danger">Logout</button>

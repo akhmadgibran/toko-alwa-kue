@@ -31,7 +31,7 @@
                                         <td>{{ $product->description }}</td>
                                         <td>{{ $product->category->name }}</td>
                                         <td>Rp. {{ $product->price }}</td>
-                                        <td><img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}"></td>
+                                        <td><img style="width: 50%" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}"></td>
                                         <td>
                                             <a href="{{ Auth::user()->usertype == 'admin' ? route('admin.product.edit', $product->id) : route('superadmin.product.edit', $product->id) }}" class="btn btn-primary">Edit</a>
                                             <form action="{{ Auth::user()->usertype == 'admin' ? route('admin.product.destroy', $product->id) : route('superadmin.product.destroy', $product->id) }}" method="POST" style="display: inline-block">
