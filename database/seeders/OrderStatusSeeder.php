@@ -15,6 +15,9 @@ class OrderStatusSeeder extends Seeder
     {
         //
         DB::table('order_statuses')->insert([
+            'status' => 'Menunggu Pembayaran',
+        ]);
+        DB::table('order_statuses')->insert([
             'status' => 'Menunggu Verifikasi',
         ]);
 
