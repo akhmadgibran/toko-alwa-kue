@@ -8,10 +8,10 @@
         <div class="row" >
             {{-- order summary --}}
             <div>
-                <h3>Konfirmasi Pembayaran</h3>
+                <h3>Konfirmasi Pembayaran Tertunda</h3>
                 <p>Kode Order :</p>
                 <p>{{ $order->costom_order_id }}</p>
-                <p>Anda akan melakukan transaksi sebelumnya sebesar Rp. {{ $order->total_price }}</p>
+                <p>Anda akan melakukan transaksi yang sebelumnya tertunda sebesar Rp. {{ $order->total_price }}</p>
                 <button id="pay-button" class="btn btn-primary" >Bayar Sekarang</button>
             </div>
         </div>
@@ -30,7 +30,7 @@
     payButton.addEventListener('click', function () {
       // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token.
       // Also, use the embedId that you defined in the div above, here.
-      window.snap.embed('{{ $snapToken }}', {
+      window.snap.embed('{{ $order->snap_token }}', {
         embedId: 'snap-container',
         onSuccess: function (result) {
           /* You may add your own implementation here */

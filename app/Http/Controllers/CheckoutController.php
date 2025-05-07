@@ -125,4 +125,56 @@ class CheckoutController extends Controller
 
         // ! midtrans code end
     }
+
+    public function success($custom_order_id)
+    {
+        // * ambil data order
+        $order = Order::where('custom_order_id', $custom_order_id)->first();
+
+        // // * ambil data order detail
+        // $orderDetails = OrderDetail::where('order_id', $custom_order_id)->get();
+
+        // * hapus cart
+        Cart::where('user_id', Auth::user()->id)->delete();
+
+        // rubah status order menjadi "Menunggu Konfirmasi"
+        $order->status = 'Menunggu Konfirmasi';
+        $order->save();
+
+        return view('costumer.checkout.success', compact('order'));
+    }
+
+    public function fail($custom_order_id)
+    {
+        // * ambil data order
+        $order = Order::where('custom_order_id', $custom_order_id)->first();
+
+        // rubah status order menjadi "Gagal"
+        $order->status = 'Gagal';
+        $order->save();
+
+        return view('costumer.checkout.fail', compact('order'));
+    }
+    public function pending($custom_order_id)
+    {
+        // * ambil data order
+        $order = Order::where('custom_order_id', $custom_order_id)->first();
+
+        // rubah status order menjadi "Menunggu Pembayaran"
+        $order->status = 'Menunggu Pembayaran';
+        $order->save();
+
+        return view('costumer.checkout.pending', compact('order'));
+    }
+    public function cancel($custom_order_id)
+    {
+        // * ambil data order
+        $order = Order::where('custom_order_id', $custom_order_id)->first();
+
+        // rubah status order menjadi "Dibatalkan"
+        $order->status = 'Dibatalkan';
+        $order->save();
+
+        return view('costumer.checkout.cancel', compact('order'));
+    }
 }

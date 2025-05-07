@@ -36,5 +36,8 @@ class OrderStatusSeeder extends Seeder
         DB::table('order_statuses')->insert([
             'status' => 'Ditolak',
         ]);
+        DB::table('order_statuses')->insert([
+            'status' => 'Dibatalkan',
+        ]);
     }
 }
