@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('custom_order_id')->unique();
             $table->unsignedBigInteger('user_id');
             $table->string('address');
             $table->integer('total_price');
-            $table->string('status')->default('Menunggu Verifikasi');
+            $table->string('status')->default('Menunggu Pembayaran');
             $table->longText('buyer_note')->nullable();
             $table->longText('seller_note')->nullable();
             $table->timestamps();

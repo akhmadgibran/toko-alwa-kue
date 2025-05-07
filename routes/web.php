@@ -62,6 +62,9 @@ Route::middleware(['auth', 'costumer'])->group(function () {
     Route::controller(CheckoutController::class)->group(function () {
         Route::get('/checkout', 'index')->name('costumer.checkout.index');
         Route::post('/checkout', 'store')->name('costumer.checkout.store');
+        Route::get('/checkout/success', 'success')->name('costumer.checkout.success');
+        Route::get('/checkout/fail', 'fail')->name('costumer.checkout.fail');
+        Route::get('/checkout/pending', 'pending')->name('costumer.checkout.pending');
     });
 });
 
