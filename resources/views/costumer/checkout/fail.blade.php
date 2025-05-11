@@ -11,7 +11,7 @@
                 <h3>Pembayaran Gagal</h3>
                 <p>Kode Order :</p>
                 <p>{{ $order->costom_order_id }}</p>
-                <p>Pembayaran anda gagal</p>
+                <p>Pembayaran anda gagal, Pesanan anda dibatalkan</p>
                 <a href="{{ route('home') }}" class="btn btn-primary">Kembali ke Home</a>
             </div>
         </div>

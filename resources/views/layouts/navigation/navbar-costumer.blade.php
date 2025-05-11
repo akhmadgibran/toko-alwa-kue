@@ -30,6 +30,7 @@
                             <a href="{{ route('register') }}" class="btn btn-success">Register</a> --}}
                             <a class="btn btn-success mb-2" href="{{ route('costumer.cart.index') }}">Cart</a>
                             <a class="btn btn-primary mb-2" href="{{ route('profile.edit') }}">Profile</a>
+                            <a class="btn btn-primary mb-2" href="{{ route('costumer.order.index') }}">Order</a>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" style="width: 100%" class="btn btn-danger">Logout</button>
@@ -45,6 +46,9 @@
             <a href="{{ route('register') }}" class="btn btn-success">Register</a> --}}
             <a href="{{ route('costumer.cart.index') }}">
                 <img style="width: 75%" src="{{ asset('icons/mage_basket-fill.png') }}" alt="cart">
+            </a>
+            <a href="{{ route('costumer.order.index') }}">
+                <img style="width: 75%" src="{{ asset('icons/lsicon_order-filled.png') }}" alt="">
             </a>
             <a href="{{ route('profile.edit') }}">
                 <img style="width: 75%" src="{{ asset('icons/iconamoon_profile-circle-fill.png') }}" alt="profile"></a>

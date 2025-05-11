@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BestSellerController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\ProductCategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductControllers;
-use App\Http\Controllers\ShopStatusController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ProductControllers;
+use App\Http\Controllers\BestSellerController;
+use App\Http\Controllers\ShopStatusController;
+use App\Http\Controllers\ProductCategoryController;
 
 Route::get('/', function () {
     return view('homeV2');
@@ -66,7 +67,15 @@ Route::middleware(['auth', 'costumer'])->group(function () {
         Route::post('/checkout/fail/{custom_order_id}', 'fail')->name('costumer.checkout.fail');
         Route::post('/checkout/pending/{custom_order_id}', 'pending')->name('costumer.checkout.pending');
         Route::post('/checkout/cancel/{custom_order_id}', 'cancel')->name('costumer.checkout.cancel');
+        Route::get('/checkout/pending/{custom_order_id}/payment', 'pendingPayment')->name('checkout.pending.payment');
     });
+
+
+    Route::get('order', [OrderController::class, 'indexCostumer'])->name('costumer.order.index');
+
+    Route::post('order', [OrderController::class, 'costumerOrderFiltered'])->name('costumer.order.filtered');
+
+    Route::get('order/{custom_order_id}', [OrderController::class, 'costumerShowOrder'])->name('costumer.order.show');
 });
 
 // group route usertype admin

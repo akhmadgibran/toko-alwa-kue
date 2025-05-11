@@ -20,4 +20,14 @@ class Order extends Model
         'seller_note',
         'snap_token'
     ];
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'custom_order_id', 'custom_order_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

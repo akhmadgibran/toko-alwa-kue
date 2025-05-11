@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\OrderStatus;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\ShopStatusSeeder;
+use Database\Seeders\OrderStatusSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,7 +21,8 @@ class DatabaseSeeder extends Seeder
         //  call seeder
         $this->call([
             UserSeeder::class,
-            ShopStatusSeeder::class
+            ShopStatusSeeder::class,
+            OrderStatusSeeder::class
         ]);
     }
 }
