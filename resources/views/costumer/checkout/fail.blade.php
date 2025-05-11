@@ -8,11 +8,11 @@
         <div class="row" >
             {{-- order summary --}}
             <div>
-                <h3>Pembayaran Berhasil</h3>
+                <h3>Pembayaran Gagal</h3>
                 <p>Kode Order :</p>
                 <p>{{ $order->costom_order_id }}</p>
-                <p>Anda telah melakukan transaksi sebesar Rp. {{ $order->total_price }}</p>
-                <a href="{{ route('costumer.order.index') }}" class="btn btn-primary">Lihat Halaman Orderan</a>
+                <p>Pembayaran anda gagal, Pesanan anda dibatalkan</p>
+                <a href="{{ route('home') }}" class="btn btn-primary">Kembali ke Home</a>
             </div>
         </div>
     </div>
