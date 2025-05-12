@@ -22,6 +22,11 @@
                         {{ __('Kelola Status Toko') }}
                     </a>
                 </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ route('admin.order.index') }}">
+                        {{ __('Kelola Orderan') }}
+                    </a>
+                </li>
 
             </ul>
 

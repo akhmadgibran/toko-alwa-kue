@@ -72,7 +72,7 @@ class CartController extends Controller
         $cartItem->quantity = $validatedData['quantity'];
         $cartItem->save();
 
-        return redirect('costumer.cart.index')->with('success', 'Quantity berhasil diubah');
+        return redirect()->route('costumer.cart.index')->with('success', 'Quantity berhasil diubah');
     }
 
     // * method delete cart item

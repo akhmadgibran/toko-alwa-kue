@@ -77,6 +77,12 @@ class CheckoutController extends Controller
             return $item->product->price * $item->quantity;
         });
 
+        // * hitung subtotal per item
+        $userCart->map(function ($item) {
+            $item->subtotal = $item->product->price * $item->quantity;
+            return $item;
+        });
+
         $customOrderId = 'INV-' . strtoupper(Str::random(5)) . '-' . time();
 
         // * make new order /transaction
@@ -94,12 +100,13 @@ class CheckoutController extends Controller
                 'custom_order_id' => $order->custom_order_id,
                 'product_id' => $userCartitem->product_id,
                 'quantity' => $userCartitem->quantity,
+                'subtotal' => $userCartitem->subtotal,
             ]);
         }
 
         // * get the newly created order and  order details
         $order = Order::where('custom_order_id', $customOrderId)->first();
-        $orderDetails = OrderDetail::where('order_id', $order->custom_order_id)->get();
+        $orderDetails = OrderDetail::where('custom_order_id', $order->custom_order_id)->get();
 
         if (!$order) {
             // Log an error or handle the case where the order is not found
@@ -162,7 +169,7 @@ class CheckoutController extends Controller
         Cart::where('user_id', Auth::user()->id)->delete();
 
         // rubah status order menjadi "Menunggu Konfirmasi"
-        $order->status = 'Menunggu Konfirmasi';
+        $order->status = 'Menunggu Verifikasi';
         $order->save();
 
         return view('costumer.checkout.success', compact('order'));

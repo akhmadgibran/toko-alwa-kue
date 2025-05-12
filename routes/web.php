@@ -118,6 +118,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::put('admin/bestseller', 'update')->name('admin.bestseller.update');
         // Route::delete('/bestseller/{id}', 'destroy')->name('admin.bestseller.destroy');
     });
+
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/admin/order', 'indexAdmin')->name('admin.order.index');
+        Route::post('/admin/order', 'adminOrderFiltered')->name('admin.order.filtered');
+        Route::get('/admin/order/{custom_order_id}', 'adminShowOrder')->name('admin.order.show');
+        Route::put('/admin/order/{custom_order_id}', 'adminUpdateOrder')->name('admin.order.update');
+    });
 });
 
 Route::middleware(['auth', 'superadmin'])->group(function () {
@@ -167,6 +174,13 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
         // Route::get('/bestseller/{id}/edit', 'edit')->name('admin.bestseller.edit');
         Route::put('/superadmin/bestseller', 'update')->name('superadmin.bestseller.update');
         // Route::delete('/bestseller/{id}', 'destroy')->name('admin.bestseller.destroy');
+    });
+
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/superadmin/order', 'indexAdmin')->name('superadmin.order.index');
+        Route::post('/superadmin/order', 'adminOrderFiltered')->name('superadmin.order.filtered');
+        Route::get('/superadmin/order/{custom_order_id}', 'adminShowOrder')->name('superadmin.order.show');
+        Route::put('/superadmin/order/{custom_order_id}', 'adminUpdateOrder')->name('superadmin.order.update');
     });
 });
 // Route::put('/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');

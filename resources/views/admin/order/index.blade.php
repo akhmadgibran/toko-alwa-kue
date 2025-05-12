@@ -1,11 +1,17 @@
 {{-- index order for costumer, in here, costumer can see their order filtered based on their status --}}
 
+@php
+    $actionRoute = Auth::user()->usertype == 'admin'
+        ? route('admin.order.filtered')
+        : route('superadmin.order.filtered');
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
 <section id="page-title" class="d-flex justify-content-center align-items-center py-5" style="min-height: 20vh" >
     <div id="container">
-        <h2>Halaman Orderanmu</h2>
+        <h2>Halaman Orderan Costumer</h2>
     </div>
 </section>
 
@@ -15,7 +21,7 @@
             {{-- filter -- All --}}
             {{-- filter -- Menunggu Pembayaran --}}
             <div>
-                <form action="{{ route('costumer.order.filtered') }}" method="POST">
+                <form action="{{ $actionRoute }}" method="POST">
                     @csrf
                     <input type="hidden" name="status" value="Menunggu Pembayaran">
                     <button type="submit" class="btn btn-primary">Menunggu Pembayaran</button>
@@ -24,7 +30,7 @@
             </div>
             {{-- filter -- Menunggu Verifikasi --}}
             <div>
-                <form action="{{ route('costumer.order.filtered') }}" method="POST">
+                <form action="{{ $actionRoute }}" method="POST">
                     @csrf
                     <input type="hidden" name="status" value="Menunggu Verifikasi">
                     <button type="submit" class="btn btn-primary">Menunggu Verifikasi</button>
@@ -32,7 +38,7 @@
             </div>
             {{-- filter -- Dalam Proses --}}
             <div>
-                <form action="{{ route('costumer.order.filtered') }}" method="POST">
+                <form action="{{ $actionRoute }}" method="POST">
                     @csrf
                     <input type="hidden" name="status" value="Dalam Proses">
                     <button type="submit" class="btn btn-primary">Dalam Proses</button>
@@ -40,7 +46,7 @@
             </div>
             {{-- filter -- Delivery --}}
             <div>
-                <form action="{{ route('costumer.order.filtered') }}" method="POST">
+                <form action="{{ $actionRoute }}" method="POST">
                     @csrf
                     <input type="hidden" name="status" value="Delivery">
                     <button type="submit" class="btn btn-primary">Delivery</button>
@@ -48,7 +54,7 @@
             </div>
             {{-- filter -- Selesai --}}
             <div>
-                <form action="{{ route('costumer.order.filtered') }}" method="POST">
+                <form action="{{ $actionRoute }}" method="POST">
                     @csrf
                     <input type="hidden" name="status" value="Selesai">
                     <button type="submit" class="btn btn-primary">Selesai</button>
@@ -56,7 +62,7 @@
             </div>
             {{-- filter -- Ditolak --}}
             <div>
-                <form action="{{ route('costumer.order.filtered') }}" method="POST">
+                <form action="{{ $actionRoute }}" method="POST">
                     @csrf
                     <input type="hidden" name="status" value="Ditolak">
                     <button type="submit" class="btn btn-primary">Ditolak</button>
@@ -64,7 +70,7 @@
             </div>
             {{-- filter -- Dibatalkan --}}
             <div>
-                <form action="{{ route('costumer.order.filtered') }}" method="POST">
+                <form action="{{ $actionRoute }}" method="POST">
                     @csrf
                     <input type="hidden" name="status" value="Dibatalkan">
                     <button type="submit" class="btn btn-primary">Dibatalkan</button>
@@ -77,17 +83,17 @@
 <section id="order-list" class="d-flex justify-content-center " style="min-height: 70vh" >
     <div id="container" >
         {{-- <div class="d-flex flex-row" > --}}
-            @if ($costumerOrderItems->isEmpty())
+            @if ($adminOrderItems->isEmpty())
                 <div class="alert alert-warning" role="alert">
                     Tidak ada orderan dengan status tersebut.
                 </div>
             @else
-                @foreach ($costumerOrderItems as $order )
-                   
+                @foreach ($adminOrderItems as $order )
+
                 <div class="d-flex flex-row shadow-lg rounded" >
                     <div class="d-flex flex-column  justify-content-center" >
                         <p class="">{{ $order->custom_order_id }}</p>
-                        <p>Rp. {{ number_format($order->total_price, 0, ',', '.') }}</p>
+                        <p>Rp. {{ $order->total_price }}</p>
                     </div>
          
 
@@ -98,7 +104,12 @@
                     </div>
 
                     <div class="d-flex text-center justify-center align-items-center" >
-                        <a href="{{ route('costumer.order.show', $order->custom_order_id) }}">
+                        @php
+                            $actionRoute2 = Auth::user()->usertype == 'admin'
+                            ? route('admin.order.show', $order->custom_order_id)
+                            : route('superadmin.order.show', $order->custom_order_id);
+                        @endphp
+                        <a href="{{ $actionRoute2 }}">
                             <p>Lihat Detail</p>
                         </a>
                     </div>
