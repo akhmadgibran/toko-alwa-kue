@@ -59,7 +59,7 @@
                             <tr>
                                 {{-- <td>Rp. {{ $subTotal }}</td> --}}
                                 {{-- <td>Rp. {{ $ongkir }}</td> --}}
-                                <td>Rp. {{ $totalPrice }}</td>
+                                <td>Rp. {{ number_format($totalPrice, 0, ',', '.') }}</td>
                             </tr>
 
                         </tbody>
@@ -79,7 +79,7 @@
                     <form action="{{ route('costumer.checkout.store') }}" method="POST">
                         @csrf
                         <label for="buyer_note">Catatan untuk penjual :</label>
-                        <textarea name="buyer_note" id="buyer_note" class="w-100" rows="5" required></textarea>
+                        <textarea name="buyer_note" id="buyer_note" class="" cols="34" rows="5" required></textarea>
                         <button class="btn btn-primary w-100">Checkout</button>
                     </form>
                     @endif

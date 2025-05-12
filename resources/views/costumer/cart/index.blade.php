@@ -27,7 +27,14 @@
                                 {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
                                 <td>{{ $cartItem->product->name }}</td>
                                 <td>Rp. {{ $cartItem->product->price }}</td>
-                                <td>{{ $cartItem->quantity }}</td>
+                                {{-- quantity td, with + and - button to deceased or increase quantity --}}
+                                <td>
+                                    <form action="{{ route('costumer.cart.update', $cartItem->id) }}" method="POST" style="display: inline-block">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" max="{{ $cartItem->product->stock }}" class="form-control" style="width: 80px; display: inline-block">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </form>
                                 <td>Rp. {{ number_format($cartItem->sub_total, 0, ',', '.') }}</td>
                                 <td>
                                     <form action="{{ route('costumer.cart.destroy', $cartItem->id) }}" method="POST" style="display: inline-block">
@@ -59,7 +66,7 @@
                             <tr>
                                 {{-- <td>Rp. {{ $subTotal }}</td> --}}
                                 {{-- <td>Rp. {{ $ongkir }}</td> --}}
-                                <td>Rp. {{ $totalPrice }}</td>
+                                <td>Rp. {{ number_format($totalPrice, 0, ',', '.') }}</td>
                             </tr>
                         </tbody>
                     </table>

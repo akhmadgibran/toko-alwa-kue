@@ -12,7 +12,7 @@
                 <p>Kode Order :</p>
                 {{-- {{ dd($order) }} --}}
                 <p>{{ $order->costom_order_id }}</p>
-                <p>Anda akan melakukan transaksi yang sebelumnya tertunda sebesar Rp. {{ $order->total_price }}</p>
+                <p>Anda akan melakukan transaksi yang sebelumnya tertunda sebesar Rp. {{ number_format($order->total_price, 0, ',', '.') }}</p>
                 <button id="pay-button" class="btn btn-primary" >Bayar Sekarang</button>
             </div>
         </div>
@@ -39,7 +39,20 @@
           onSuccess: function(result){
             /* You may add your own implementation here */
             alert("payment success!"); console.log(result);
-            window.location.href = "{{ route('costumer.checkout.success', ['custom_order_id' => $order->custom_order_id]) }}";
+            // window.location.href = "{{ route('costumer.checkout.success', ['custom_order_id' => $order->custom_order_id]) }}";
+            var form = document.createElement("form");
+            form.setAttribute("method", "POST");
+            form.setAttribute("action", "{{ route('costumer.checkout.success', ['custom_order_id' => $order->custom_order_id]) }}");
+
+            var csrfToken = document.createElement("input");
+            csrfToken.setAttribute("type", "hidden");
+            csrfToken.setAttribute("name", "_token");
+            csrfToken.setAttribute("value", "{{ csrf_token() }}");
+
+            form.appendChild(csrfToken);
+
+            document.body.appendChild(form);
+            form.submit();
           },
           onPending: function(result){
             /* You may add your own implementation here */

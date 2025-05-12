@@ -38,30 +38,57 @@ class OrderController extends Controller
     public function indexAdmin()
     {
         $adminOrderItems = Order::latest()->paginate(4);
-        return view('admin.order.index', compact('adminOrderItems'));
+        // return view('admin.order.index', compact('adminOrderItems'));
+        if (Auth::user()->usertype == "admin") {
+            return view('admin.order.index', compact('adminOrderItems'));
+        } elseif (Auth::user()->usertype == "superadmin") {
+            return view('admin.order.index', compact('adminOrderItems'));
+        }
     }
 
 
-    // public function adminOrderFiltered(Request $request)
-    // {
-    //     $adminOrderItems = Order::where('status', $request->status)->latest()->paginate(4);
-    //     return view('admin.order.index', compact('adminOrderItems'));
-    // }
 
-    // public function adminShowOrder($id)
-    // {
-    //     $orderStatus = OrderStatus::all();
-    //     $adminOrderItem = Order::where('id', $id)->first();
-    //     $adminOrderDetail = OrderDetail::where('order_id', $adminOrderItem->id)->get();
-    //     return view('admin.order.show', compact('orderStatus', 'adminOrderItem', 'adminOrderDetail'));
-    // }
+    public function adminOrderFiltered(Request $request)
+    {
+        $adminOrderItems = Order::where('status', $request->status)->latest()->paginate(4);
+        // return view('admin.order.index', compact('adminOrderItems'));
+        if (Auth::user()->usertype == "admin") {
+            return view('admin.order.index')->with(compact('adminOrderItems'));
+        } elseif (Auth::user()->usertype == "superadmin") {
+            return view('admin.order.index')->with(compact('adminOrderItems'));
+        }
+    }
 
-    // public function adminUpdateOrder(Request $request, $id)
-    // {
-    //     $order = Order::find($id);
-    //     $order->status = $request->status;
-    //     $order->seller_note = $request->seller_note;
-    //     $order->save();
-    //     return redirect()->route('admin.order.index')->with('success', 'Status pesanan berhasil diubah');
-    // }
+    public function adminShowOrder($custom_order_id)
+    {
+        $orderStatus = OrderStatus::all();
+        $adminOrderItem = Order::where('custom_order_id', $custom_order_id)->first();
+        $adminOrderDetail = OrderDetail::where('custom_order_id', $custom_order_id)->get();
+        // return view('admin.order.show', compact('orderStatus', 'adminOrderItem', 'adminOrderDetail'));
+        if (Auth::user()->usertype == "admin") {
+            return view('admin.order.show')->with(compact('orderStatus', 'adminOrderItem', 'adminOrderDetail'));
+        } elseif (Auth::user()->usertype == "superadmin") {
+            return view('admin.order.show')->with(compact('orderStatus', 'adminOrderItem', 'adminOrderDetail'));
+        }
+    }
+
+
+    public function adminUpdateOrder(Request $request, $custom_order_id)
+    {
+        $validatedData = $request->validate([
+            'status' => 'required|exists:order_statuses,status',
+            'seller_note' => 'nullable|string|max:255',
+        ]);
+        $order = Order::where('custom_order_id', $custom_order_id)->first();
+        $order->status = $validatedData['status'];
+        $order->seller_note = $validatedData['seller_note'];
+        $order->save();
+        // return view('admin.order.index')->with('success', 'Status pesanan berhasil diubah');
+
+        if (Auth::user()->usertype == "admin") {
+            return redirect()->route('admin.order.index')->with('success', 'Status pesanan berhasil diubah');
+        } elseif (Auth::user()->usertype == "superadmin") {
+            return redirect()->route('superadmin.order.index')->with('success', 'Status pesanan berhasil diubah');
+        }
+    }
 }

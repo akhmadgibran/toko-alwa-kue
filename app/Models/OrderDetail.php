@@ -12,7 +12,8 @@ class OrderDetail extends Model
     protected $fillable = [
         'custom_order_id',
         'product_id',
-        'quantity'
+        'quantity',
+        'subtotal',
     ];
     protected $table = 'order_details';
     public function order()
