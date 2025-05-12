@@ -59,7 +59,7 @@
                             <tr>
                                 {{-- <td>Rp. {{ $subTotal }}</td> --}}
                                 {{-- <td>Rp. {{ $ongkir }}</td> --}}
-                                <td>Rp. {{ $totalPrice }}</td>
+                                <td>Rp. {{ number_format($totalPrice, 0, ',', '.') }}</td>
                             </tr>
 
                         </tbody>
@@ -72,12 +72,17 @@
                         <p class="text-danger" style="font-size: 11px;">*Alamat tidak bisa diganti setelah order</p>
                         <p class="text-danger" style="font-size: 11px;">*Mohon ganti alamat anda di profile apabila salah</p>
                     </div>
-                    <label for="buyer_note">Catatan untuk penjual :</label>
+                    
+                    @if ($costumerName == null || $costumerAddress == null || $costumerPhone == null)
+                        <a href="{{ route('profile.edit') }}" class="btn btn-primary">Lengkapi Data Diri</a>
+                    @else
                     <form action="{{ route('costumer.checkout.store') }}" method="POST">
                         @csrf
-                        <textarea name="buyer_note" id="buyer_note" class="w-100" rows="5"></textarea>
+                        <label for="buyer_note">Catatan untuk penjual :</label>
+                        <textarea name="buyer_note" id="buyer_note" class="" cols="34" rows="5" required></textarea>
                         <button class="btn btn-primary w-100">Checkout</button>
                     </form>
+                    @endif
 
                     
                 </div>

@@ -77,6 +77,12 @@ class CheckoutController extends Controller
             return $item->product->price * $item->quantity;
         });
 
+        // * hitung subtotal per item
+        $userCart->map(function ($item) {
+            $item->subtotal = $item->product->price * $item->quantity;
+            return $item;
+        });
+
         $customOrderId = 'INV-' . strtoupper(Str::random(5)) . '-' . time();
 
         // * make new order /transaction
@@ -91,30 +97,55 @@ class CheckoutController extends Controller
         //  * make new order detail
         foreach ($userCart as $userCartitem) {
             OrderDetail::create([
-                'order_id' => $order->custom_order_id,
+                'custom_order_id' => $order->custom_order_id,
                 'product_id' => $userCartitem->product_id,
                 'quantity' => $userCartitem->quantity,
+                'subtotal' => $userCartitem->subtotal,
             ]);
         }
 
         // * get the newly created order and  order details
         $order = Order::where('custom_order_id', $customOrderId)->first();
-        $orderDetails = OrderDetail::where('order_id', $order->custom_order_id)->get();
+        $orderDetails = OrderDetail::where('custom_order_id', $order->custom_order_id)->get();
+
+        if (!$order) {
+            // Log an error or handle the case where the order is not found
+            return redirect()->route('costumer.checkout.index')->with('error', 'Order not found.');
+        }
+
+        if (!$orderDetails) {
+            // Log an error or handle the case where the order details are not found
+            return redirect()->route('costumer.checkout.index')->with('error', 'Order details not found.');
+        }
 
         // ! midtrans code
-        $transactionDetails = [
-            'transaction_details' => [
+        // $transactionDetails = [
+        //     'transaction_details' => [
+        //         'order_id' => $order->custom_order_id,
+        //         'gross_amount' => $totalPrice,
+        //     ],
+        //     'customer_details' => [
+        //         'first_name' => Auth::user()->name,
+        //         'email' => Auth::user()->email,
+        //         'phone' => Auth::user()->phone,
+        //     ],
+        // ];
+
+        $params = array(
+            'transaction_details' => array(
                 'order_id' => $order->custom_order_id,
                 'gross_amount' => $totalPrice,
-            ],
-            'customer_details' => [
+            ),
+            'customer_details' => array(
                 'first_name' => Auth::user()->name,
+                // 'last_name' => 'pratama',
                 'email' => Auth::user()->email,
-                'phone' => Auth::user()->phone,
-            ],
-        ];
+                'phone' =>  Auth::user()->phone,
+            ),
+        );
 
-        $snapToken = Snap::getSnapToken($transactionDetails);
+        // $snapToken = Snap::getSnapToken($transactionDetails);
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
 
         // Simpan snap_token ke order kalau perlu
         $order->snap_token = $snapToken;
@@ -124,5 +155,72 @@ class CheckoutController extends Controller
         return view('costumer.checkout.payment', compact('snapToken', 'order', 'orderDetails'));
 
         // ! midtrans code end
+    }
+
+    public function success($custom_order_id)
+    {
+        // * ambil data order
+        $order = Order::where('custom_order_id', $custom_order_id)->first();
+
+        // // * ambil data order detail
+        // $orderDetails = OrderDetail::where('order_id', $custom_order_id)->get();
+
+        // * hapus cart
+        Cart::where('user_id', Auth::user()->id)->delete();
+
+        // rubah status order menjadi "Menunggu Konfirmasi"
+        $order->status = 'Menunggu Verifikasi';
+        $order->save();
+
+        return view('costumer.checkout.success', compact('order'));
+    }
+
+
+    public function fail($custom_order_id)
+    {
+        // * ambil data order
+        $order = Order::where('custom_order_id', $custom_order_id)->first();
+
+        // rubah status order menjadi "Gagal"
+        $order->status = 'Dibatalkan';
+        $order->save();
+
+        return view('costumer.checkout.fail', compact('order'));
+    }
+    public function pending($custom_order_id)
+    {
+        // * ambil data order
+        $order = Order::where('custom_order_id', $custom_order_id)->first();
+
+        // rubah status order menjadi "Menunggu Pembayaran"
+        $order->status = 'Menunggu Pembayaran';
+        $order->save();
+
+        // return view('costumer.checkout.pending', compact('order'));
+        return redirect()->route('costumer.order.index')->with('success', 'Pesanan anda sedang menunggu pembayaran');
+    }
+
+    public function pendingPayment($custom_order_id)
+    {
+        // * ambil data order
+        $order = Order::where('custom_order_id', $custom_order_id)->first();
+
+        // // rubah status order menjadi "Menunggu Pembayaran"
+        // $order->status = 'Menunggu Pembayaran';
+        // $order->save();
+
+        return view('costumer.checkout.pending', compact('order'));
+    }
+
+    public function cancel($custom_order_id)
+    {
+        // * ambil data order
+        $order = Order::where('custom_order_id', $custom_order_id)->first();
+
+        // rubah status order menjadi "Dibatalkan"
+        $order->status = 'Dibatalkan';
+        $order->save();
+
+        return view('costumer.checkout.cancel', compact('order'));
     }
 }

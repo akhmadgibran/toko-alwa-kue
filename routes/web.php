@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BestSellerController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\ProductCategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductControllers;
-use App\Http\Controllers\ShopStatusController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ProductControllers;
+use App\Http\Controllers\BestSellerController;
+use App\Http\Controllers\ShopStatusController;
+use App\Http\Controllers\ProductCategoryController;
 
 Route::get('/', function () {
     return view('homeV2');
@@ -62,10 +63,19 @@ Route::middleware(['auth', 'costumer'])->group(function () {
     Route::controller(CheckoutController::class)->group(function () {
         Route::get('/checkout', 'index')->name('costumer.checkout.index');
         Route::post('/checkout', 'store')->name('costumer.checkout.store');
-        Route::get('/checkout/success', 'success')->name('costumer.checkout.success');
-        Route::get('/checkout/fail', 'fail')->name('costumer.checkout.fail');
-        Route::get('/checkout/pending', 'pending')->name('costumer.checkout.pending');
+        Route::post('/checkout/success/{custom_order_id}', 'success')->name('costumer.checkout.success');
+        Route::post('/checkout/fail/{custom_order_id}', 'fail')->name('costumer.checkout.fail');
+        Route::post('/checkout/pending/{custom_order_id}', 'pending')->name('costumer.checkout.pending');
+        Route::post('/checkout/cancel/{custom_order_id}', 'cancel')->name('costumer.checkout.cancel');
+        Route::get('/checkout/pending/{custom_order_id}/payment', 'pendingPayment')->name('checkout.pending.payment');
     });
+
+
+    Route::get('order', [OrderController::class, 'indexCostumer'])->name('costumer.order.index');
+
+    Route::post('order', [OrderController::class, 'costumerOrderFiltered'])->name('costumer.order.filtered');
+
+    Route::get('order/{custom_order_id}', [OrderController::class, 'costumerShowOrder'])->name('costumer.order.show');
 });
 
 // group route usertype admin
@@ -107,6 +117,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
         // Route::get('/bestseller/{id}/edit', 'edit')->name('admin.bestseller.edit');
         Route::put('admin/bestseller', 'update')->name('admin.bestseller.update');
         // Route::delete('/bestseller/{id}', 'destroy')->name('admin.bestseller.destroy');
+    });
+
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/admin/order', 'indexAdmin')->name('admin.order.index');
+        Route::post('/admin/order', 'adminOrderFiltered')->name('admin.order.filtered');
+        Route::get('/admin/order/{custom_order_id}', 'adminShowOrder')->name('admin.order.show');
+        Route::put('/admin/order/{custom_order_id}', 'adminUpdateOrder')->name('admin.order.update');
     });
 });
 
@@ -157,6 +174,13 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
         // Route::get('/bestseller/{id}/edit', 'edit')->name('admin.bestseller.edit');
         Route::put('/superadmin/bestseller', 'update')->name('superadmin.bestseller.update');
         // Route::delete('/bestseller/{id}', 'destroy')->name('admin.bestseller.destroy');
+    });
+
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/superadmin/order', 'indexAdmin')->name('superadmin.order.index');
+        Route::post('/superadmin/order', 'adminOrderFiltered')->name('superadmin.order.filtered');
+        Route::get('/superadmin/order/{custom_order_id}', 'adminShowOrder')->name('superadmin.order.show');
+        Route::put('/superadmin/order/{custom_order_id}', 'adminUpdateOrder')->name('superadmin.order.update');
     });
 });
 // Route::put('/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
