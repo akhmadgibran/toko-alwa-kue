@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductControllers;
@@ -11,12 +12,16 @@ use App\Http\Controllers\BestSellerController;
 use App\Http\Controllers\ShopStatusController;
 use App\Http\Controllers\ProductCategoryController;
 
-Route::get('/', function () {
-    return view('homeV2');
+Route::controller(PublicController::class)->group(function () {
+    Route::get('/', 'home')->name('home');
+    Route::get('/home', 'home')->name('home');
+    // Route::get('/about', 'about')->name('about');
+    // Route::get('/contact', 'contact')->name('contact');
+    // Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
+    // Route::get('/terms-and-conditions', 'termsAndConditions')->name('terms-and-conditions');
 });
-Route::get('/homebuild', function () {
-    return view('homeV2');
-});
+
+
 
 Route::get('/footerbuild', function () {
     return view('layouts.footer.footer-guest-costumer');
@@ -33,13 +38,6 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('product/{id}', 'show')->name('product.show');
 });
 
-Route::get('/home', function () {
-    return view('homeV2');
-})->name('home');
-
-// Route::get('/home', function () {
-//     return view('home');
-// })->name('home')->middleware('auth', 'verified');
 
 // Route::view('/profile/edit', 'profile.edit')->middleware('auth', 'verified')->name('profile.edit');
 // Route::view('/profile/password', 'profile.password')->middleware('auth', 'verified')->name('profile.password');
@@ -115,7 +113,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         // Route::get('/bestseller/create', 'create')->name('admin.bestseller.create');
         // Route::post('/bestseller', 'store')->name('admin.bestseller.store');
         // Route::get('/bestseller/{id}/edit', 'edit')->name('admin.bestseller.edit');
-        Route::put('admin/bestseller', 'update')->name('admin.bestseller.update');
+        Route::patch('admin/bestseller/{id}', 'update')->name('admin.bestseller.update');
         // Route::delete('/bestseller/{id}', 'destroy')->name('admin.bestseller.destroy');
     });
 
@@ -172,7 +170,7 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
         // Route::get('/bestseller/create', 'create')->name('admin.bestseller.create');
         // Route::post('/bestseller', 'store')->name('admin.bestseller.store');
         // Route::get('/bestseller/{id}/edit', 'edit')->name('admin.bestseller.edit');
-        Route::put('/superadmin/bestseller', 'update')->name('superadmin.bestseller.update');
+        Route::patch('/superadmin/bestseller/{id}', 'update')->name('superadmin.bestseller.update');
         // Route::delete('/bestseller/{id}', 'destroy')->name('admin.bestseller.destroy');
     });
 

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BestSeller;
 use App\Models\User;
 use App\Models\OrderStatus;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             ShopStatusSeeder::class,
-            OrderStatusSeeder::class
+            OrderStatusSeeder::class,
+            BestSellerSeeder::class,
         ]);
     }
 }

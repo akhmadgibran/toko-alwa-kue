@@ -15,13 +15,13 @@ class BestSellerSeeder extends Seeder
     {
         //
         DB::table("best_sellers")->insert([
-            "product_id" => 0,
+            "product_id" => null,
         ]);
         DB::table("best_sellers")->insert([
-            "product_id" => 0,
+            "product_id" => null,
         ]);
         DB::table("best_sellers")->insert([
-            "product_id" => 0,
+            "product_id" => null,
         ]);
     }
 }
