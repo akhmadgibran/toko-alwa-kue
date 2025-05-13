@@ -32,6 +32,12 @@
                     </a>
                 </li>
 
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ route('superadmin.bestseller.index') }}">
+                        {{ __('Kelola Best Seller') }}
+                    </a>
+                </li>
+
             </ul>
 
             <!-- Right Side Of Navbar -->

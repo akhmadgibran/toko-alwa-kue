@@ -53,24 +53,20 @@
             <h2>Best Selling Product !</h2>
         </div>
         <div class="row p-4" >
-            <div class="col-md-4 col-sm-6 mb-4 " >
-                {{-- style="max-width: 350px; min-width: 10%;" --}}
-                <a href="">
-                    <img src="{{ asset('sample/square-product.png') }}" class="img-fluid shadow"  alt="">
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6 mb-4 " >
-                {{-- style="max-width: 350px; min-width: 10%;" --}}
-                <a href="">
-                    <img src="{{ asset('sample/square-product.png') }}" class="img-fluid shadow"  alt="">
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6 mb-4 " >
-                {{-- style="max-width: 350px; min-width: 10%;" --}}
-                <a href="">
-                    <img src="{{ asset('sample/square-product.png') }}" class="img-fluid shadow"  alt="">
-                </a>
-            </div>
+            @if ($bestSellerItems->isEmpty())
+                <div class="alert alert-warning" role="alert">
+                    {{ __('Belum ada produk best seller.') }}
+                </div>
+            @else
+                @foreach ($bestSellerItems as $Item )
+                    <div class="col-md-4 col-sm-6 mb-4 " >
+                        {{-- style="max-width: 350px; min-width: 10%;" --}}
+                        <a href="{{ route('product.show', $Item->product_id) }}" class="text-decoration-none text-dark" >
+                            <img src="{{ asset('storage/' . $Item->product->image_path) }}" class="img-fluid shadow"  alt="">
+                        </a>
+                    </div>
+               @endforeach
+            @endif
         </div>
     </div>
 </section>

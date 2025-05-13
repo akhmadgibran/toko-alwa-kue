@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BestSeller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,11 +13,13 @@ class BestSellerController extends Controller
     public function index()
     {
         $bestSellerItems = BestSeller::all();
+        // retreive all products
+        $products = Product::all();
 
         if (Auth::user()->usertype == 'superadmin') {
-            return view('admin.best-seller.index', compact('bestSellerItems'));
+            return view('admin.best-seller.index', compact('bestSellerItems', 'products'));
         } else {
-            return view('admin.best-seller.index', compact('bestSellerItems'));
+            return view('admin.best-seller.index', compact('bestSellerItems', 'products'));
         }
     }
 
@@ -34,9 +37,9 @@ class BestSellerController extends Controller
         $bestSellerItem->save();
 
         if (Auth::user()->usertype == 'superadmin') {
-            return redirect()->route('superadmin.best-seller.index')->with('success', 'Best seller updated successfully!');
+            return redirect()->route('superadmin.bestseller.index')->with('success', 'Best seller updated successfully!');
         } else {
-            return redirect()->route('admin.best-seller.index')->with('success', 'Best seller updated successfully!');
+            return redirect()->route('admin.bestseller.index')->with('success', 'Best seller updated successfully!');
         }
     }
 }

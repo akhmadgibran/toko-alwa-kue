@@ -27,6 +27,11 @@
                         {{ __('Kelola Orderan') }}
                     </a>
                 </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ route('admin.bestseller.index') }}">
+                        {{ __('Kelola Best Seller') }}
+                    </a>
+                </li>
 
             </ul>
 

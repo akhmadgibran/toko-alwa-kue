@@ -60,7 +60,7 @@
                             <tr>
                                 {{-- <td>Rp. {{ $subTotal }}</td> --}}
                                 {{-- <td>Rp. {{ $ongkir }}</td> --}}
-                                <td>Rp. {{ $adminOrderItem->custom_order_id }}</td>
+                                <td>Rp. {{ number_format($adminOrderItem->total_price, 0, ',', '.') }}</td>
                             </tr>
                         </tbody>
                     </table>
