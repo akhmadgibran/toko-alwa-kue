@@ -55,7 +55,7 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:product_categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image',
         ]);
 
         // Upload image to storage and get the path

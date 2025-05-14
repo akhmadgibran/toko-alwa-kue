@@ -16,12 +16,12 @@
         <div class="row" >
             @foreach ($categories as $category )
                 {{-- each categories, anchor to page with products in that category --}}
-                <div class="col-md-4 col-sm-12 "  >
+                <div class="col-md-3  "  >
                     <a class="text-decoration-none text-black"  href="{{ route('product.index', ['id' => $category->id]) }}">
                     
                         {{-- category image --}}
                         <div>
-                            <img src="{{ asset('storage/' . $category->image_path) }}" alt="Category Image" class="img-fluid">
+                            <img src="{{ asset('storage/' . $category->image_path) }}" alt="Category Image" class="img-fluid rounded rounded-4" >
                         </div>
                         {{-- end category image --}}
         
