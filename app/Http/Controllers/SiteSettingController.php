@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class SiteSettingController extends Controller
@@ -14,7 +15,8 @@ class SiteSettingController extends Controller
     public function index()
     {
         // fetch all site settings
-        $siteSettings = SiteSetting::all();
+        $siteSettings = SiteSetting::first();
+        // dd($siteSettings);
         return view('admin.site-setting.index', compact('siteSettings'));
     }
 
@@ -52,7 +54,7 @@ class SiteSettingController extends Controller
 
             // Store new logo
             $path = $request->file('logo_path')->store('site-logos', 'public');
-            $validatedData['logo_path'] = 'storage/' . $path;
+            $validatedData['logo_path'] = $path;
         }
 
         if ($siteSetting) {
@@ -61,6 +63,12 @@ class SiteSettingController extends Controller
             SiteSetting::create($validatedData);
         }
 
-        return redirect()->back()->with('success', 'Site settings updated successfully.');
+
+        // return redirect()->route('admin.site-setting.index')->with('success', 'Site settings updated successfully.');
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('admin.site-setting.index')->with('success', 'Site settings updated successfully.');
+        } else {
+            return redirect()->route('superadmin.site-setting.index')->with('success', 'Site settings updated successfully.');
+        }
     }
 }

@@ -185,5 +185,6 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
 
     Route::controller(SiteSettingController::class)->group(function () {
         Route::get('/superadmin/site-setting', 'index')->name('superadmin.site-setting.index');
+        Route::put('/superadmin/site-setting', 'update')->name('superadmin.site-setting.update');
     });
 });

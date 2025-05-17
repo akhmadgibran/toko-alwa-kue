@@ -8,6 +8,7 @@ use App\Models\User;
 use Midtrans\Config;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\SiteSetting;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,8 @@ class CheckoutController extends Controller
 
         // * ambil nomor telepon admin
         $adminPhone = User::where('usertype', 'admin')->first()->phone;
+
+        $siteSettings = SiteSetting::first();
 
         // * kirim data ke view
         return view('costumer.checkout.index', compact('cartItems', 'totalPrice', 'adminPhone', 'costumerAddress', 'costumerName', 'costumerPhone'));

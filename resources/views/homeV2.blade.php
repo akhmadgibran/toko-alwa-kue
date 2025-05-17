@@ -4,7 +4,7 @@
 {{-- hero section --}}
 <section id="guest-hero" class="d-flex justify-content-center align-items-center shadow-lg" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('backgrounds/hero-background.jpg') }}') center/cover ;" >
     <div class="text-center text-white" >
-        <h1>Selamat Datang di Alwa Kue</h1>
+        <h1>Selamat Datang di {{ $siteSettings->shop_name }}</h1>
         <p>Pilih product apa hari ini ?</p>
         <a href="{{ route('product.category') }}" class="btn btn-primary">Product Kami</a>
     </div>
@@ -41,7 +41,7 @@
 <section id="slogan" class="d-flex justify-content-center align-items-center bg-body-secondary shadow-sm" style="min-height: 30vh" >
     <div class="container">
         <div class="text-center py-4" >
-            <h2>Apapun acaranya, Alwa Kue solusinya.</h2>
+            <h2>{{ $siteSettings->slogan }}</h2>
         </div>
     </div>
 </section>
@@ -59,15 +59,14 @@
         </div>
         <div class="row" >
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center" >
-                    <img class="w-75" src="{{ asset('logo/logo.png') }}" alt="" width="">
+            <img class="w-75" src="{{ asset('storage/' . $siteSettings->logo_path) }}" alt="logo {{ $siteSettings->shop_name }}" width="">
+
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center" >
                 <div class="d-flex flex-column justify-content-center">
-                    <h2 class="">Tentang Alwa Kue</h2>
-                    <p class="">ALWA KUE merupakan toko kue di Tulungagung yang menyediakan berbagai macam aneka Snack, Cookies, Tart, Kue Tradisional, Paket Snack, dan masih banyak lagi produk yang kami tawarkan. Kini, ALWA KUE hadir di Sebalor, Kec. Bandung, Kabupaten Tulungagung, Jawa Timur 66274. Kami juga melayani pemesanan secara online melalui WhatsApp dan Instagram. 
-                    </p>
-                    <p class="" >
-                        Dengan tema “APAPUN ACARANYA, ALWA KUE SOLUSINYA”, kami siap melayani segala kebutuhan Sahabat ALWA.
+                    <h2 class="">Tentang {{ $siteSettings->shop_name }}</h2>
+                    <p class="">
+                        {{ $siteSettings->about_us }}
                     </p>
                 </div>
             </div>
