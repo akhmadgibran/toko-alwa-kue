@@ -16,6 +16,10 @@ class BestSellerController extends Controller
         // retreive all products
         $products = Product::all();
 
+
+
+
+
         if (Auth::user()->usertype == 'superadmin') {
             return view('admin.best-seller.index', compact('bestSellerItems', 'products'));
         } else {

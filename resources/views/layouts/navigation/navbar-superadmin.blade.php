@@ -38,6 +38,12 @@
                     </a>
                 </li>
 
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ route('superadmin.site-setting.index') }}">
+                        {{ __('Kelola Website') }}
+                    </a>
+                </li>
+
             </ul>
 
             <!-- Right Side Of Navbar -->

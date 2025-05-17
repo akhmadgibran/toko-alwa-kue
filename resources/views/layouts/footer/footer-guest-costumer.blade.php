@@ -1,3 +1,7 @@
+@php
+        $siteSettings = \App\Models\SiteSetting::first();
+@endphp
+
 <footer id="footer">
     <div class="row">
         <div class="col-12 bg-body-secondary">
@@ -12,7 +16,7 @@
                             <!-- Text -->
                             <div>
                                 <h4 class="mb-1">Telephone</h4>
-                                <p class="mb-0">085875206802</p>
+                                <p class="mb-0">{{ $siteSettings->phone }}</p>
                             </div>
                         </div>
                     </div>
@@ -25,7 +29,7 @@
                                 style="max-width: 50px; max-height: 50px;" alt="facebook-icon">
                             <div>
                                 <h4 class="mb-1">Facebook</h4>
-                                <p class="mb-0">Alwa kue</p>
+                                <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->facebook_link }}" target="_blank" >{{ $siteSettings->facebook_name }}</a>
                             </div>
                         </div>
                         {{-- instagram --}}
@@ -34,7 +38,7 @@
                                 style="max-width: 50px; max-height: 50px;" alt="instagram-icon">
                             <div>
                                 <h4 class="mb-1">Instagram</h4>
-                                <p class="mb-0">Alwa_kue</p>
+                                <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->instagram_link }}" target="_blank" >{{ $siteSettings->instagram_name }}</a>
                             </div>
                         </div>
                     </div>
@@ -46,7 +50,7 @@
                                 style="max-width: 50px; max-height: 50px;" alt="location-icon">
                             <div>
                                 <h4 class="mb-1">Location</h4>
-                                <p class="mb-0">Sirah Kandang, Jl. Sebalor, Kec. Bandung, Kabupaten Tulungagung, Jawa Timur 66274.</p>
+                                <p class="mb-0">{{ $siteSettings->address }}</p>
                             </div>
                         </div>
                     </div>

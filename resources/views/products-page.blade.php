@@ -19,7 +19,7 @@
                     <div class="col-md-4 col-sm-12 "  >
                         <a class="text-decoration-none text-black"  href="{{ route('product.show', ['id' => $product->id]) }}">
                             <div>
-                                <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image" class="img-fluid">
+                                <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image" class="img-fluid rounded rounded-4">
                             </div>
                             <div>
                                 <h3>{{ $product->name }}</h3>

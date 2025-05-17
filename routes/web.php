@@ -10,6 +10,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductControllers;
 use App\Http\Controllers\BestSellerController;
 use App\Http\Controllers\ShopStatusController;
+use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\ProductCategoryController;
 
 Route::controller(PublicController::class)->group(function () {
@@ -19,6 +20,12 @@ Route::controller(PublicController::class)->group(function () {
     // Route::get('/contact', 'contact')->name('contact');
     // Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
     // Route::get('/terms-and-conditions', 'termsAndConditions')->name('terms-and-conditions');
+    Route::get('product/category', [ProductCategoryController::class, 'index'])->name('product.category');
+    // Route::get('/product/category/{id}', [ProductControllers::class, 'index'])->name('user.product.index');
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('product/category/{id}', 'index')->name('product.index');
+        Route::get('product/{id}', 'show')->name('product.show');
+    });
 });
 
 
@@ -31,12 +38,7 @@ Route::get('cartBuild', function () {
     return view('costumer.cart.index');
 });
 
-Route::get('product/category', [ProductCategoryController::class, 'index'])->name('product.category');
-// Route::get('/product/category/{id}', [ProductControllers::class, 'index'])->name('user.product.index');
-Route::controller(ProductController::class)->group(function () {
-    Route::get('product/category/{id}', 'index')->name('product.index');
-    Route::get('product/{id}', 'show')->name('product.show');
-});
+
 
 
 // Route::view('/profile/edit', 'profile.edit')->middleware('auth', 'verified')->name('profile.edit');
@@ -180,13 +182,9 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
         Route::get('/superadmin/order/{custom_order_id}', 'adminShowOrder')->name('superadmin.order.show');
         Route::put('/superadmin/order/{custom_order_id}', 'adminUpdateOrder')->name('superadmin.order.update');
     });
+
+    Route::controller(SiteSettingController::class)->group(function () {
+        Route::get('/superadmin/site-setting', 'index')->name('superadmin.site-setting.index');
+        Route::put('/superadmin/site-setting', 'update')->name('superadmin.site-setting.update');
+    });
 });
-// Route::put('/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
-
-// Route::get('/login', function () {
-//     return view('auth.login');
-// })->name('login');
-
-// Route::get('/register', function () {
-//     return view('auth.register');
-// })->name('register');
