@@ -3,58 +3,146 @@
 @extends('layouts.app')
 
 @section('content')
+    <section id="cart" class="container p-4 d-flex align-items-center justify-content-center" style="min-height: 70vh">
 
-<section id="cart" class="py-5" style="min-height: 70vh" >
-    <div class="container" >
-            <div class="row" >
-                        {{-- cart table --}}
-            <div class="col-md-7 col-sm-12 " >
-                <h3>Keranjang Belanja</h3>
-                <table class="table">
+        <div class="row justify-content-center">
+            {{-- cart table --}}
+            <div class="col-lg-7 col-12 ">
+                <h3 class="title-script">Keranjang Belanja</h3>
+                <table class="table normal-font table-transparent d-none d-lg-table">
                     <thead>
                         <tr>
-                            {{-- <th scope="col">No</th> --}}
-                            <th scope="col">Item</th>
+                            <th scope="col">Items</th>
                             <th scope="col">Harga</th>
-                            <th scope="col">Jumlah</th>
+                            <th scope="col" class="text-center">Jumlah</th>
                             <th scope="col">Subtotal</th>
-                            <th scope="col">Aksi</th>
+                            <th scope="col" class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($cartItems as $cartItem)
                             <tr>
-                                {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                <td>{{ $cartItem->product->name }}</td>
-                                <td>Rp. {{ $cartItem->product->price }}</td>
-                                {{-- quantity td, with + and - button to deceased or increase quantity --}}
-                                <td>
-                                    <form action="{{ route('costumer.cart.update', $cartItem->id) }}" method="POST" style="display: inline-block">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" max="{{ $cartItem->product->stock }}" class="form-control" style="width: 80px; display: inline-block">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </form>
-                                <td>Rp. {{ number_format($cartItem->sub_total, 0, ',', '.') }}</td>
-                                <td>
-                                    <form action="{{ route('costumer.cart.destroy', $cartItem->id) }}" method="POST" style="display: inline-block">
+                                <td style="vertical-align: middle;">{{ $cartItem->product->name }}</td>
+                                <td style="vertical-align: middle;">Rp. {{ $cartItem->product->price }}</td>
+
+                                {{-- <td style="vertical-align: middle;">
+                                        <form action="{{ route('costumer.cart.update', $cartItem->id) }}" method="POST" style="display: inline-block">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" max="{{ $cartItem->product->stock }}" class="form-control" style="width: 80px; display: inline-block">
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </form>
+                                    </td> --}}
+
+
+                                <td style="vertical-align: middle;">
+                                    <div class="d-flex align-items-center gap-2 justify-content-center">
+                                        {{-- Decrement Form --}}
+                                        <form action="{{ route('costumer.cart.update', $cartItem->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="quantity" value="{{ $cartItem->quantity - 1 }}">
+                                            <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                                {{ $cartItem->quantity <= 1 ? 'disabled' : '' }}>−</button>
+                                        </form>
+
+                                        {{-- Quantity Display --}}
+                                        <span class="px-2">{{ $cartItem->quantity }}</span>
+
+                                        {{-- Increment Form --}}
+                                        <form action="{{ route('costumer.cart.update', $cartItem->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="quantity" value="{{ $cartItem->quantity + 1 }}">
+                                            <button type="submit" class="btn btn-outline-secondary btn-sm">+</button>
+                                        </form>
+                                    </div>
+                                </td>
+
+
+
+                                <td style="vertical-align: middle;">Rp.
+                                    {{ number_format($cartItem->sub_total, 0, ',', '.') }}</td>
+
+
+                                <td class="text-center" style="vertical-align: middle;">
+                                    <form action="{{ route('costumer.cart.destroy', $cartItem->id) }}" method="POST"
+                                        style="display: inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                        <button type="submit" class="btn">
+                                            <img style="width: 55%" class="img-fluid"
+                                                src="{{ asset('icons/iconoir_trash-solid.png') }}" alt="delete"
+                                                style="width: 20px">
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+
+                <div class="d-block d-lg-none">
+                    @foreach ($cartItems as $cartItem)
+                        <div id="cart-list" class="d-flex flex-column mb-2">
+                            <h3>{{ $cartItem->product->name }}</h3>
+                            <p>Rp. {{ number_format($cartItem->product->price, 0, ',', '.') }}</p>
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="d-flex align-items-center gap-2 justify-content-center">
+                                    {{-- Decrement Form --}}
+                                    <form action="{{ route('costumer.cart.update', $cartItem->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="quantity" value="{{ $cartItem->quantity - 1 }}">
+                                        <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                            {{ $cartItem->quantity <= 1 ? 'disabled' : '' }}>−</button>
+                                    </form>
+
+                                    {{-- Quantity Display --}}
+                                    <span class="px-2">{{ $cartItem->quantity }}</span>
+
+                                    {{-- Increment Form --}}
+                                    <form action="{{ route('costumer.cart.update', $cartItem->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="quantity" value="{{ $cartItem->quantity + 1 }}">
+                                        <button type="submit" class="btn btn-outline-secondary btn-sm">+</button>
+                                    </form>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <form action="{{ route('costumer.cart.destroy', $cartItem->id) }}" method="POST"
+                                        style="display: inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn">
+                                            <img style="width: 45%" class="img-fluid"
+                                                src="{{ asset('icons/iconoir_trash-solid.png') }}" alt="delete"
+                                                style="width: 20px">
+                                        </button>
+                                    </form>
+
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center ms-auto" style="height: 100%;">
+                                    <p class="mb-0">Rp. {{ number_format($cartItem->sub_total, 0, ',', '.') }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
             </div>
-            {{-- end cart table --}}
+
 
             {{-- cart summary --}}
-            <div class="col-md-3 col-sm-12 border rounded" style="" >
-                <div class="p-3">
+            <div class="col-lg-3 col-12" style="min-width: 300px">
+                <div class="p-3 bg-card-primer">
                     <h3>Ringkasan Belanja</h3>
-                    <table class="table">
+                    <table class="table table-transparent normal-font">
                         <thead>
                             <tr>
                                 {{-- <th scope="col">Subtotal</th> --}}
@@ -70,12 +158,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a href="{{ route('costumer.checkout.index') }}" class="btn btn-primary w-100">Order</a>
+                    <a href="{{ route('costumer.checkout.index') }}" class="btn bg-button-primer w-100">Order</a>
                 </div>
             </div>
             {{-- end cart summary --}}
-            </div>
-    </div>
-</section>
+        </div>
 
+    </section>
 @endsection

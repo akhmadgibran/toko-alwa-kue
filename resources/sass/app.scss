@@ -27,7 +27,14 @@ h3,
 h4,
 p,
 a,
+label,
 .btn {
+    font-family: "Sawarabi Gothic", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.normal-font {
     font-family: "Sawarabi Gothic", cursive;
     font-weight: 400;
     font-style: normal;
@@ -55,6 +62,15 @@ a,
 }
 
 // end background color
+
+.table-transparent,
+.table-transparent thead,
+.table-transparent tbody,
+.table-transparent th,
+.table-transparent td,
+.table-transparent tr {
+    background-color: transparent !important;
+}
 
 .navbar.fixed-top {
     transition: all 0.3s ease;

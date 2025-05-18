@@ -1,15 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- hero section --}}
-{{-- <section id="guest-hero" class="d-flex justify-content-center align-items-center shadow-lg h-100 w-100" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('backgrounds/hero-background.jpg') }}') center/cover ;" >
-    <div class="text-center text-white" >
-        <h1>Selamat Datang di {{ $siteSettings->shop_name }}</h1>
-        <p>Pilih product apa hari ini ?</p>
-        <a href="{{ route('product.category') }}" class="btn btn-primary">Product Kami</a>
-    </div>
-</section> --}}
-{{-- end hero section --}}
+
 
 {{-- hero section --}}
 <section id="guest-hero" class="d-flex justify-content-center align-items-center shadow-lg w-100"
@@ -32,29 +24,29 @@
             <h2 class="title-script">Best Selling</h2>
             <p>Discover our new premium Specialty Cakes. The perfect fusion of innovative design and timeless flavors. Enjoy intricate layers, delicate textures, and balanced flavours in every bite.</p>
         </div>
-<div class="col-12 col-sm-9">
-    <div class="d-flex flex-row overflow-auto gap-4 pb-5 slider">
-        @if ($bestSellerItems->isEmpty())
-            <div class="alert alert-warning" role="alert">
-                {{ __('Belum ada produk best seller.') }}
-            </div>
-        @else
-            @foreach($bestSellerItems as $Item)
-                {{-- products --}}
-                <div class="p-3 rounded-0 bg-card-primer responsive-card" style="width: 18rem; flex: 0 0 auto;">
-                    <div>
-                        <img src="{{ asset('storage/' . $Item->product->image_path) }}" alt="" class="img-fluid shadow-md mb-2">
-                        <h4>{{ $Item->product->name }}</h4>
-                        <p>Rp. {{ number_format($Item->product->price, 0, ',', '.') }}</p>
-                        <a href="{{ route('product.show', $Item->product_id) }}" class="btn bg-button-primer w-100 rounded rounded-5">Pilih produk</a>
+        <div class="col-12 col-sm-9">
+            <div class="d-flex flex-row overflow-auto gap-4 pb-5 slider">
+                @if ($bestSellerItems->isEmpty())
+                    <div class="alert alert-warning" role="alert">
+                        {{ __('Belum ada produk best seller.') }}
                     </div>
-                </div>
-                {{-- end products --}}
-            @endforeach
-        @endif
+                @else
+                    @foreach($bestSellerItems as $Item)
+                        {{-- products --}}
+                        <div class="p-3 rounded-0 bg-card-primer responsive-card" style="width: 18rem; flex: 0 0 auto;">
+                            <div>
+                                <img src="{{ asset('storage/' . $Item->product->image_path) }}" alt="" class="img-fluid shadow-md mb-2">
+                                <h4>{{ $Item->product->name }}</h4>
+                                <p>Rp. {{ number_format($Item->product->price, 0, ',', '.') }}</p>
+                                <a href="{{ route('product.show', $Item->product_id) }}" class="btn bg-button-primer w-100 rounded rounded-5">Pilih produk</a>
+                            </div>
+                        </div>
+                        {{-- end products --}}
+                    @endforeach
+                @endif
 
-    </div>
-</div>
+            </div>
+        </div>
 
     </div>
 </section>
@@ -62,30 +54,6 @@
 
 
 
-{{-- best selling section --}}
-{{-- <section id="best-selling" class="d-flex flex-column justify-content-center" style="min-height: 70vh" >
-    <div class="container ">
-        <div class="text-center py-4" >
-            <h2>Best Selling Product !</h2>
-        </div>
-        <div class="row p-4" >
-            @if ($bestSellerItems->isEmpty())
-                <div class="alert alert-warning" role="alert">
-                    {{ __('Belum ada produk best seller.') }}
-                </div>
-            @else
-                @foreach ($bestSellerItems as $Item )
-                    <div class="col-md-4 col-sm-6 mb-4 " >
-                        <a href="{{ route('product.show', $Item->product_id) }}" class="text-decoration-none text-dark" >
-                            <img src="{{ asset('storage/' . $Item->product->image_path) }}" class="img-fluid shadow-lg rounded rounded-4"  alt="">
-                        </a>
-                    </div>
-               @endforeach
-            @endif
-        </div>
-    </div>
-</section> --}}
-{{-- end best selling section --}}
 
 
 {{-- slogan section --}}
