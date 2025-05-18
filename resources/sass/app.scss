@@ -1,2 +1,134 @@
 @use "bootstrap/scss/bootstrap";
 @use "pages/guest-home.scss";
+@import url("https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Rouge+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Rouge+Script&family=Sawarabi+Gothic&display=swap");
+
+// start font
+// .rouge-script-regular {
+//     font-family: "Rouge Script", cursive;
+//     font-weight: 400;
+//     font-style: normal;
+// }
+.quote-script {
+    font-family: "Rouge Script", cursive;
+    font-weight: 500;
+    font-size: 3.2rem;
+    font-style: normal;
+}
+
+.title-script {
+    font-family: "Bree Serif", cursive;
+    font-weight: 500;
+    font-style: normal;
+}
+
+h3,
+h4,
+p,
+a,
+.btn {
+    font-family: "Sawarabi Gothic", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+// end font
+
+// start background color
+.bg-primer-light {
+    background-color: #efecea; /* A lighter shade of secondary */
+}
+
+.bg-footer-primer {
+    background-color: #aec5c6; /* A lighter shade of secondary */
+}
+.bg-button-primer {
+    background-color: #b9d8d9; /* A lighter shade of secondary */
+}
+.bg-button-primer:hover {
+    background-color: #aec5c6; /* A lighter shade of secondary */
+}
+
+.bg-card-primer {
+    background-color: #f5f4f4; /* A lighter shade of secondary */
+}
+
+// end background color
+
+.navbar.fixed-top {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add this to your CSS file */
+.slider::-webkit-scrollbar {
+    height: 8px;
+}
+
+.slider::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.slider::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.slider::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+@media (min-width: 768px) {
+    .responsive-card {
+        width: 25rem !important;
+    }
+}
+
+.responsive-card {
+    width: 18rem;
+    flex: 0 0 auto;
+
+    @media (min-width: 768px) {
+        width: 25rem;
+    }
+}
+
+// quantity button
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #aaa;
+    border-radius: 999px;
+    overflow: hidden;
+    width: 130px;
+    height: 40px;
+    background-color: transparent; /* ✅ transparent background */
+}
+
+.quantity-selector input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    background: transparent; /* ✅ input transparent */
+    font-size: 16px;
+    color: inherit; /* uses current text color */
+}
+
+.quantity-selector button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent; /* ✅ button transparent */
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: inherit; /* optional: inherit text color */
+}
+
+.quantity-selector button:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* subtle hover effect */
+}
+
+// end quantity button

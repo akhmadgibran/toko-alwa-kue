@@ -21,6 +21,10 @@
                     <a class="nav-link active" aria-current="page" href="{{ route('product.category') }}">Product</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('about') }}">About us</a>
+                </li>
+
             </ul>
                         <!-- Login & Register Buttons (Mobile Only) -->
                         <div class="d-lg-none d-flex flex-column mt-3">

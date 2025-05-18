@@ -4,7 +4,7 @@
 
 <footer id="footer">
     <div class="row">
-        <div class="col-12 bg-body-secondary">
+        <div class="col-12 bg-footer-primer">
             <div class="container">
                 <div class="row p-5">
                     <!-- Telephone Section -->
@@ -29,7 +29,7 @@
                                 style="max-width: 50px; max-height: 50px;" alt="facebook-icon">
                             <div>
                                 <h4 class="mb-1">Facebook</h4>
-                                <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->facebook_link }}" target="_blank" >{{ $siteSettings->facebook_name }}</a>
+                                <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->facebook_link }}" target="_blank" ><p>{{ $siteSettings->facebook_name }}</p></a>
                             </div>
                         </div>
                         {{-- instagram --}}
@@ -38,7 +38,7 @@
                                 style="max-width: 50px; max-height: 50px;" alt="instagram-icon">
                             <div>
                                 <h4 class="mb-1">Instagram</h4>
-                                <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->instagram_link }}" target="_blank" >{{ $siteSettings->instagram_name }}</a>
+                                <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->instagram_link }}" target="_blank" ><p>{{ $siteSettings->instagram_name }}</p></a>
                             </div>
                         </div>
                     </div>

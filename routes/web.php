@@ -26,6 +26,8 @@ Route::controller(PublicController::class)->group(function () {
         Route::get('product/category/{id}', 'index')->name('product.index');
         Route::get('product/{id}', 'show')->name('product.show');
     });
+
+    Route::get('/about', 'about')->name('about');
 });
 
 

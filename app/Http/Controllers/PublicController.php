@@ -24,4 +24,10 @@ class PublicController extends Controller
         $siteSettings = SiteSetting::first();
         return view("homeV2", compact("bestSellerItems", "productCategories", 'bestSellerId1', 'bestSellerId2', 'bestSellerId3', 'siteSettings'));
     }
+
+    public function about()
+    {
+        $siteSettings = SiteSetting::first();
+        return view("about-us", compact('siteSettings'));
+    }
 }
