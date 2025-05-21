@@ -1,3 +1,5 @@
+
+
 {{-- the detail of the product --}}
 
 @extends('layouts.app')
@@ -56,13 +58,15 @@
             @if (!Auth::check())
                 <input type="hidden" name="quantity" id="hidden-quantity" value="1">
                 <a href="{{ route('login') }}" class="btn bg-button-primer w-100 rounded-5">Add to Cart</a>
-            @else
+            @elseif (Auth::check() && $statusToko->name == 'open')
                 <form action="{{ route('costumer.cart.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <input type="hidden" name="quantity" id="hidden-quantity" value="1">
                     <button type="submit" class="btn bg-button-primer w-100 rounded-5">Add to Cart</button>
                 </form>
+            @else
+                <a href="{{ route('costumer.cart.index') }}" class="btn bg-button-primer w-100 rounded-5 disabled">Add to Cart</a>
             @endif
             </div>
 

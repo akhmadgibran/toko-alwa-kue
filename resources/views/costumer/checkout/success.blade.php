@@ -16,5 +16,5 @@
                 <a href="{{ route('costumer.order.index') }}" class="btn bg-button-primer w-100">Lihat Halaman Orderan</a>
             </div>
         </div>
-
 </section>
+@endsection

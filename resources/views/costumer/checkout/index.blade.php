@@ -99,7 +99,6 @@
                             <th scope="col">Harga</th>
                             <th scope="col" class="text-center">Jumlah</th>
                             <th scope="col">Subtotal</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -107,7 +106,7 @@
                             <tr>
                                 <td style="vertical-align: middle;">{{ $cartItem->product->name }}</td>
                                 <td style="vertical-align: middle;">Rp. {{ $cartItem->product->price }}</td>
-                                <td style="vertical-align: middle;">{{ $cartItem->quantity }}</td>
+                                <td class="text-center" style="vertical-align: middle;">{{ $cartItem->quantity }}</td>
                                 <td style="vertical-align: middle;">Rp.
                                     {{ number_format($cartItem->sub_total, 0, ',', '.') }}</td>
                             </tr>
@@ -137,7 +136,6 @@
                             </div>
                         </div>
                     @endforeach
-
                 </div>
                 {{-- end mobile --}}
             </div>
@@ -161,11 +159,14 @@
                     <div>
                         <h4>Penerima</h4>
                         <p>Nama : {{ $costumerName }}</p>
-                        <p>Alamat : {{ $costumerAddress }}</p>
                         <p>Nomor Whatsapp : {{ $costumerPhone }}</p>
-                        <p class="text-danger" style="font-size: 11px;">*Alamat tidak bisa diganti setelah order</p>
-                        <p class="text-danger" style="font-size: 11px;">*Mohon ganti alamat anda di profile apabila salah
+                        <p>Alamat : </p>
+                        <p class="faded-border">{{ $costumerAddress }}</p>
+                        <p class="text-danger mb-0" style="font-size: 11px; mb-0">*Alamat tidak bisa diganti setelah order</p>
+                        <p class="text-danger mb-0" style="font-size: 11px;">*Mohon ganti alamat anda di profile apabila salah
                         </p>
+                        
+
                     </div>
                     @if ($costumerName == null || $costumerAddress == null || $costumerPhone == null)
                         <a href="{{ route('profile.edit') }}" class="btn bg-button-primer w-100">Lengkapi Data Diri</a>
@@ -173,7 +174,7 @@
                         <form action="{{ route('costumer.checkout.store') }}" method="POST">
                             @csrf
                             <label for="buyer_note">Catatan untuk penjual :</label>
-                            <textarea name="buyer_note" id="buyer_note" class="w-100" rows="5" required></textarea>
+                            <textarea placeholder="Isikan keterangan-keterangan yang harus dijelaskan secara rinci" name="buyer_note" id="buyer_note" class="w-100" rows="5" required></textarea>
                             <button class="btn bg-button-primer w-100">Checkout</button>
                         </form>
                     @endif

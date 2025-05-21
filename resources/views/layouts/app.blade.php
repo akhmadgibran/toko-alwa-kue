@@ -1,5 +1,16 @@
 <?php 
 $siteSettings = \App\Models\SiteSetting::first();
+
+
+
+$statusToko = App\Models\ShopStatus::all();
+
+if ($statusToko[0]->name == 'open') {
+    $statusToko = 'open';
+} else {
+    $statusToko = 'closed';
+}
+
 ?>
 
 <!doctype html>
@@ -30,6 +41,7 @@ $siteSettings = \App\Models\SiteSetting::first();
 
         <main class="">
             @include('layouts.flash-message')
+            {{-- @include('layouts.shop-status-flash-message') --}}
             @yield('content')
         </main>
 

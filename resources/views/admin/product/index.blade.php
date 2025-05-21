@@ -3,7 +3,7 @@
 
 @section('content')
 <section id="index-product-admin" > 
-    <div class="container py-5">
+    <div class="container mt-5">
         <div class="row justify-content-center " style="height: 100vh;" >
             <div class="col-md-8">
                 <div class="card">

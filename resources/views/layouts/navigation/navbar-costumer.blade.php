@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+<nav id="mainNavbar" class="navbar navbar-expand-lg bg-body-tertiary shadow">
     <div class="container-fluid d-flex justify-content-between align-items-center mx-5">
         <!-- Logo -->
         <a class="navbar-brand" href="{{ route('home') }}">
@@ -61,4 +61,22 @@
         </div>
        
     </div>
+    
 </nav>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const navbar = document.getElementById('mainNavbar');
+        const navbarOffsetTop = navbar.offsetTop;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > navbarOffsetTop) {
+                navbar.classList.add('fixed-top');
+                document.body.style.paddingTop = navbar.offsetHeight + 'px'; // prevent jump
+            } else {
+                navbar.classList.remove('fixed-top');
+                document.body.style.paddingTop = '0';
+            }
+        });
+    });
+</script>

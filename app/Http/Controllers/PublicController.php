@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BestSeller;
+use App\Models\ShopStatus;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
@@ -12,6 +13,14 @@ class PublicController extends Controller
     //
     public function home()
     {
+        $statusToko = ShopStatus::all();
+
+        if ($statusToko[0]->name == 'open') {
+            $statusToko = 'open';
+        } else {
+            $statusToko = 'closed';
+        }
+
         $bestSellerItems = BestSeller::all();
         $bestSellerId1 = $bestSellerItems->where('id', 1)->first();
         $bestSellerId2 = $bestSellerItems->where('id', 2)->first();

@@ -3,12 +3,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <section id="cart" class="container p-4 d-flex align-items-center justify-content-center" style="min-height: 70vh">
+    <section id="cart" class="p-5" style="min-height: 70vh">
+        {{-- class="container p-4 d-flex align-items-center justify-content-center" style="min-height: 70vh" --}}
 
         <div class="row justify-content-center">
+            {{--  justify-content-center --}}
             {{-- cart table --}}
             <div class="col-lg-7 col-12 ">
                 <h3 class="title-script">Keranjang Belanja</h3>
+
+                {{-- large screen --}}
                 <table class="table normal-font table-transparent d-none d-lg-table">
                     <thead>
                         <tr>
@@ -24,16 +28,6 @@
                             <tr>
                                 <td style="vertical-align: middle;">{{ $cartItem->product->name }}</td>
                                 <td style="vertical-align: middle;">Rp. {{ $cartItem->product->price }}</td>
-
-                                {{-- <td style="vertical-align: middle;">
-                                        <form action="{{ route('costumer.cart.update', $cartItem->id) }}" method="POST" style="display: inline-block">
-                                            @csrf
-                                            @method('PATCH')
-                                            <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" max="{{ $cartItem->product->stock }}" class="form-control" style="width: 80px; display: inline-block">
-                                            <button type="submit" class="btn btn-primary">Update</button>
-                                        </form>
-                                    </td> --}}
-
 
                                 <td style="vertical-align: middle;">
                                     <div class="d-flex align-items-center gap-2 justify-content-center">
@@ -83,7 +77,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{-- end large screen --}}
 
+                {{-- mobile --}}
                 <div class="d-block d-lg-none">
                     @foreach ($cartItems as $cartItem)
                         <div id="cart-list" class="d-flex flex-column mb-2">
@@ -135,6 +131,7 @@
                     @endforeach
 
                 </div>
+                {{-- end mobile --}}
             </div>
 
 

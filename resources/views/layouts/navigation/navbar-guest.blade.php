@@ -45,6 +45,7 @@
        
     </div>
 </nav>
+ @include('layouts.shop-status-flash-message')
 
 <script>
     window.addEventListener('DOMContentLoaded', () => {
