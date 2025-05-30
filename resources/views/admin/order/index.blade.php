@@ -309,6 +309,9 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="d-flex justify-content-center">
+                    {{ $adminOrderItems->links() }}
+                </div>
             @endif
             {{-- </div> --}}
         </div>

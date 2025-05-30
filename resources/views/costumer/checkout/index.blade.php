@@ -3,87 +3,6 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- <section id="cart" class="py-5" style="min-height: 70vh" >
-    <div class="container" >
-            <div class="row" >
-                 
-            <div class="col-md-7 col-sm-12 " >
-                <h3>Item Belanja</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                          
-                            <th scope="col">Item</th>
-                            <th scope="col">Harga</th>
-                            <th scope="col">Jumlah</th>
-                            <th scope="col">Subtotal</th>
-          
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($cartItems as $cartItem)
-                            <tr>
-                   
-                                <td>{{ $cartItem->product->name }}</td>
-                                <td>Rp. {{ $cartItem->product->price }}</td>
-                                <td>{{ $cartItem->quantity }}</td>
-                                <td>Rp. {{ number_format($cartItem->sub_total, 0, ',', '.') }}</td>
-                
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-           
-
-         
-            <div class="col-md-3 col-sm-12 border rounded" style="" >
-                <div class="p-3">
-                    <h3>Ringkasan Order</h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                      
-                                <th scope="col">Order Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                           
-                                <td>Rp. {{ number_format($totalPrice, 0, ',', '.') }}</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    <div>
-                        <h4>Penerima</h4>
-                        <p>Nama : {{ $costumerName }}</p>
-                        <p>Alamat : {{ $costumerAddress }}</p>
-                        <p>Nomor Whatsapp : {{ $costumerPhone }}</p>
-                        <p class="text-danger" style="font-size: 11px;">*Alamat tidak bisa diganti setelah order</p>
-                        <p class="text-danger" style="font-size: 11px;">*Mohon ganti alamat anda di profile apabila salah</p>
-                    </div>
-                    
-                    @if ($costumerName == null || $costumerAddress == null || $costumerPhone == null)
-                        <a href="{{ route('profile.edit') }}" class="btn btn-primary">Lengkapi Data Diri</a>
-                    @else
-                    <form action="{{ route('costumer.checkout.store') }}" method="POST">
-                        @csrf
-                        <label for="buyer_note">Catatan untuk penjual :</label>
-                        <textarea name="buyer_note" id="buyer_note" class="" cols="34" rows="5" required></textarea>
-                        <button class="btn btn-primary w-100">Checkout</button>
-                    </form>
-                    @endif
-
-                    
-                </div>
-            </div>
-
-            </div>
-    </div>
-</section> --}}
-
-
 <section id="cart" class="container p-4 d-flex align-items-center justify-content-center" style="min-height: 70vh">
 
         <div class="row justify-content-center w-100">
@@ -170,6 +89,8 @@
                     </div>
                     @if ($costumerName == null || $costumerAddress == null || $costumerPhone == null)
                         <a href="{{ route('profile.edit') }}" class="btn bg-button-primer w-100">Lengkapi Data Diri</a>
+                    @elseif ($statusToko->name == 'closed')
+                        <a href="#" class="btn bg-button-primer w-100 disabled">Checkout</a>
                     @else
                         <form action="{{ route('costumer.checkout.store') }}" method="POST">
                             @csrf

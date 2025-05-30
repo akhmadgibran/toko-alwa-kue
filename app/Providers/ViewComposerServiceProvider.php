@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\ShopStatus;
+use App\Models\SiteSetting;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,8 +27,12 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $statusToko = ShopStatus::first();
             // $statusToko = ($statusModel && $statusModel->name === 'open') ? 'open' : 'closed';
+            $siteSettings = SiteSetting::first();
 
-            $view->with('statusToko', $statusToko);
+            $view->with([
+                'statusToko' => $statusToko,
+                'siteSettings' => $siteSettings
+            ]);
         });
     }
 }

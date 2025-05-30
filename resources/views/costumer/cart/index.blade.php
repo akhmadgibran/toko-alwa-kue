@@ -155,7 +155,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a href="{{ route('costumer.checkout.index') }}" class="btn bg-button-primer w-100">Order</a>
+                    @if ($statusToko->name == 'open')
+                        <a href="{{ route('costumer.checkout.index') }}" class="btn bg-button-primer w-100">Order</a>
+                    @else
+                        <a href="#" class="btn bg-button-primer w-100 disabled">Order</a>
+                    @endif
                 </div>
             </div>
             {{-- end cart summary --}}

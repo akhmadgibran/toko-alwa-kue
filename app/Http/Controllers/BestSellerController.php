@@ -16,10 +16,6 @@ class BestSellerController extends Controller
         // retreive all products
         $products = Product::all();
 
-
-
-
-
         if (Auth::user()->usertype == 'superadmin') {
             return view('admin.best-seller.index', compact('bestSellerItems', 'products'));
         } else {
@@ -32,7 +28,7 @@ class BestSellerController extends Controller
     {
         // validate the incoming request data
         $validatedData = $request->validate([
-            'product_id' => 'required',
+            'product_id' => 'nullable|exists:products,id',
         ]);
 
         // find the best seller item and update the product_id

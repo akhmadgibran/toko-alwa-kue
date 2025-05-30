@@ -1,0 +1,19 @@
+// navbar and alert
+
+.navbar.fixed-top {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.faded-border {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sticky-alert-top {
+    position: sticky;
+    top: 80px; /* Adjust this value based on your actual navbar height + any desired gap */
+    z-index: 1040; /* Lower than navbar (1050) but higher than most content */
+}
+
+// end navbar and alert

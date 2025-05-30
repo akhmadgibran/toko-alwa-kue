@@ -2,7 +2,7 @@
     <div class="container-fluid d-flex justify-content-between align-items-center mx-5">
         <!-- Logo -->
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ asset('logo/logo.png') }}" alt="Bootstrap" width="50" height="50">
+            <img src="{{ asset('storage/' . $siteSettings->logo_path) }}" alt="{{ $siteSettings->shop_name }}" width="50" height="50">
         </a>
 
         <!-- Toggle Button -->
@@ -45,7 +45,7 @@
        
     </div>
 </nav>
- @include('layouts.shop-status-flash-message')
+
 
 <script>
     window.addEventListener('DOMContentLoaded', () => {

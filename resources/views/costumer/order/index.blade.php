@@ -195,6 +195,10 @@
                         </div>
                     </div>
                 @endforeach
+
+                <div class="d-flex justify-content-center" >
+                    {{ $costumerOrderItems->links() }}
+                </div>
             @endif
             {{-- </div> --}}
         </div>

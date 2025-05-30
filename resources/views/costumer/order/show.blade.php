@@ -17,15 +17,16 @@
                     <thead>
                         <tr>
                             <th scope="col">Item</th>
+                            <th scope="col">Harga</th>
                             <th scope="col" class="text-center" >Jumlah</th>
                             <th scope="col">Subtotal</th>
-                       
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($costumerOrderDetail as $Item)
                             <tr>
-                                <td style="vertical-align: middle;">{{ $Item->product ? $Item->product->name : 'Product Not Found' }}</td>
+                                <td style="vertical-align: middle;">{{ $Item->product_name }}</td>
+                                <td style="vertical-align: middle;">Rp. {{ number_format($Item->product_price, 0, ',', '.') }}</td>
                                 <td class="text-center" style="vertical-align: middle;">{{ $Item->quantity }}</td>
                                 <td style="vertical-align: middle;">Rp. {{ number_format($Item->subtotal, 0, ',', '.') }}</td>
                         @endforeach
@@ -38,11 +39,11 @@
                 <div class="d-block d-lg-none">
                     @foreach ($costumerOrderDetail as $Item)
                         <div id="cart-list" class="d-flex flex-column mb-2">
-                            <h3>{{ $Item->product->name }}</h3>
+                            <h3>{{ $Item->product_name }}</h3>
                             <div class="d-flex flex-row align-items-center">
                                 <div class="d-flex justify-content-center align-items-center me-auto"
                                     style="height: 100%;">
-                                    <p class="mb-0">Rp. {{ $Item->product->price }}</p>
+                                    <p class="mb-0">Rp. {{ $Item->product_price }}</p>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center me-auto"
                                     style="height: 100%;">

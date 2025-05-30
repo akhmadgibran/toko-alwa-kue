@@ -1,16 +1,5 @@
 <?php 
 $siteSettings = \App\Models\SiteSetting::first();
-
-
-
-$statusToko = App\Models\ShopStatus::all();
-
-if ($statusToko[0]->name == 'open') {
-    $statusToko = 'open';
-} else {
-    $statusToko = 'closed';
-}
-
 ?>
 
 <!doctype html>
@@ -41,8 +30,13 @@ if ($statusToko[0]->name == 'open') {
 
         <main class="">
             @include('layouts.flash-message')
-            {{-- @include('layouts.shop-status-flash-message') --}}
+            @if (Auth::check() && Auth::user()->usertype=='costumer')
+                @include('layouts.shop-status-flash-message')
+            @elseif (!Auth::check())
+                @include('layouts.shop-status-flash-message')
+            @endif
             @yield('content')
+            
         </main>
 
         @if (Auth::check()==true)
@@ -57,11 +51,7 @@ if ($statusToko[0]->name == 'open') {
       
     </div>
 
-      {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> --}}
 
-      {{-- <!-- Bootstrap CSS -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> --}}
 
 
       

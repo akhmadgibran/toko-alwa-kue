@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('best_sellers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id')->nullable();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });
     }

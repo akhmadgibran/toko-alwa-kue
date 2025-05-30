@@ -3,7 +3,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <section class="page-title py-5 d-flex align-items-center" style="min-height: 30vh">
         <div class="container">
             <div class="col-md-12 text-center">
@@ -13,32 +12,36 @@
         </div>
     </section>
 
-    <section id="products" >
-        <div class="container" >
-            <div class="row" >
-                @foreach ($products as $product )
-                    <div class="col-md-4 col-sm-12 "  >
-                        {{-- <a class="text-decoration-none text-black"  href="{{ route('product.show', ['id' => $product->id]) }}">
-                            <div>
-                                <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image" class="img-fluid rounded rounded-4">
+    <section id="products" style="min-height: 70vh">
+        <div class="container">
+            <div class="row">
+                @if (count($products) == 0)
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <h2 class="quote-script">No Product Yet</h2>
                             </div>
-                            <div>
-                                <h3>{{ $product->name }}</h3>
-                            </div>
-                            <div>
-                                <p>{{ $product->description }}</p>
-                            </div>
-                        </a> --}}
+                        </div>
+                    </div>
+                @endif
+                @foreach ($products as $product)
+                    <div class="col-12  col-lg-6 col-xxl-4">
                         <div class="d-flex justify-content-center p-3">
                             <div class="bg-card-primer p-3 rounded-0 responsive-card" style="width: 18rem;">
-                                <img src="{{ asset('storage/' . $product->image_path) }}" alt="" class="img-fluid shadow-md mb-2">
+                                <img src="{{ asset('storage/' . $product->image_path) }}" alt=""
+                                    class="img-fluid shadow-md mb-2">
                                 <h4>{{ $product->name }}</h4>
                                 <p>{{ $product->description }}</p>
-                                <a href="{{ route('product.show', ['id' => $product->id]) }}" class="btn bg-button-primer w-100 rounded rounded-5">Lihat Product</a>
+                                <a href="{{ route('product.show', ['id' => $product->id]) }}"
+                                    class="btn bg-button-primer w-100 rounded rounded-5">Lihat Product</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
+
+                <div class="d-flex justify-content-center">
+                    {!! $products->links() !!}
+            </div>
             </div>
         </div>
     </section>

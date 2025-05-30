@@ -3,15 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductControllers;
+use App\Http\Controllers\SuperadminDashboard;
 use App\Http\Controllers\BestSellerController;
 use App\Http\Controllers\ShopStatusController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\SuperadminDashboardController;
 
 Route::controller(PublicController::class)->group(function () {
     Route::get('/', 'home')->name('home');
@@ -52,7 +55,11 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/profile/password', 'profile.password')->name('profile.password');
 });
 
-Route::middleware(['auth', 'costumer'])->group(function () {
+Route::middleware(['auth', 'costumer', 'verified'])->group(function () {
+
+    Route::get('/welcome', function () { // Or use a dedicated controller
+        return view('costumer.dashboard'); // Create this view: resources/views/costumer/dashboard.blade.php
+    })->name('costumer.dashboard');
 
     // Route group for cart
     Route::controller(CartController::class)->group(function () {
@@ -81,11 +88,15 @@ Route::middleware(['auth', 'costumer'])->group(function () {
 });
 
 // group route usertype admin
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin', 'verified'])->group(function () {
 
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    // Route::get('/admin/dashboard', function () {
+    //     return view('admin.dashboard');
+    // })->name('admin.dashboard');
+
+    Route::controller(AdminDashboardController::class)->group(function () {
+        Route::get('admin/dashboard', 'index')->name('admin.dashboard');
+    });
 
     Route::controller(ProductCategoryController::class)->group(function () {
         Route::get('admin/category', 'adminIndex')->name('admin.category.index');
@@ -129,11 +140,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 });
 
-Route::middleware(['auth', 'superadmin'])->group(function () {
+Route::middleware(['auth', 'superadmin', 'verified'])->group(function () {
 
-    Route::get('/superadmin/dashboard', function () {
-        return view('superadmin.dashboard');
-    })->name('superadmin.dashboard');
+
+    Route::controller(SuperadminDashboardController::class)->group(function () {
+        Route::get('/superadmin/dashboard', 'index')->name('superadmin.dashboard');
+    });
 
     Route::controller(AdminController::class)->group(function () {
         Route::get('superadmin/admin', 'index')->name('superadmin.admin.index');

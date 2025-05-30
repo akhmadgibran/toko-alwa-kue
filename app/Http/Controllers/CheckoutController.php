@@ -11,7 +11,9 @@ use App\Models\OrderDetail;
 use App\Models\SiteSetting;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 
 class CheckoutController extends Controller
@@ -102,6 +104,8 @@ class CheckoutController extends Controller
             OrderDetail::create([
                 'custom_order_id' => $order->custom_order_id,
                 'product_id' => $userCartitem->product_id,
+                'product_name' => $userCartitem->product->name,
+                'product_price' => $userCartitem->product->price,
                 'quantity' => $userCartitem->quantity,
                 'subtotal' => $userCartitem->subtotal,
             ]);
@@ -208,9 +212,9 @@ class CheckoutController extends Controller
         // * ambil data order
         $order = Order::where('custom_order_id', $custom_order_id)->first();
 
-        // // rubah status order menjadi "Menunggu Pembayaran"
-        // $order->status = 'Menunggu Pembayaran';
-        // $order->save();
+        if (!$order) {
+            abort(404, 'Order not found.');
+        }
 
         return view('costumer.checkout.pending', compact('order'));
     }

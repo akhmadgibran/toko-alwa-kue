@@ -1,46 +1,12 @@
 @use "bootstrap/scss/bootstrap";
 @use "pages/guest-home.scss";
+@use "paginator/paginator.scss";
+@use "fonts/fonts.scss";
+@use "tables/tables.scss";
+@use "navbar-alert/navbar-alert.scss";
 @import url("https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Rouge+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Rouge+Script&family=Sawarabi+Gothic&display=swap");
-
-// start font
-// .rouge-script-regular {
-//     font-family: "Rouge Script", cursive;
-//     font-weight: 400;
-//     font-style: normal;
-// }
-.quote-script {
-    font-family: "Rouge Script", cursive;
-    font-weight: 500;
-    font-size: 3.2rem;
-    font-style: normal;
-}
-
-.title-script {
-    font-family: "Bree Serif", cursive;
-    font-weight: 500;
-    font-style: normal;
-}
-
-h3,
-h4,
-p,
-a,
-label,
-.btn {
-    font-family: "Sawarabi Gothic", cursive;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.normal-font {
-    font-family: "Sawarabi Gothic", cursive;
-    font-weight: 400;
-    font-style: normal;
-}
-
-// end font
 
 // start background color
 .bg-primer-light {
@@ -62,25 +28,6 @@ label,
 }
 
 // end background color
-
-.table-transparent,
-.table-transparent thead,
-.table-transparent tbody,
-.table-transparent th,
-.table-transparent td,
-.table-transparent tr {
-    background-color: transparent !important;
-}
-
-.navbar.fixed-top {
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.faded-border {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
 
 /* Add this to your CSS file */
 .slider::-webkit-scrollbar {

@@ -13,7 +13,7 @@ class OrderController extends Controller
     //
     public function indexCostumer()
     {
-        $costumerOrderItems = Order::where('user_id', Auth::user()->id)->paginate(4);
+        $costumerOrderItems = Order::where('user_id', Auth::user()->id)->latest()->simplePaginate(4);
 
         return view('costumer.order.index', compact('costumerOrderItems'));
     }
@@ -21,7 +21,7 @@ class OrderController extends Controller
 
     public function costumerOrderFiltered(Request $request)
     {
-        $costumerOrderItems = Order::where('user_id', Auth::user()->id)->where('status', $request->status)->paginate(4);
+        $costumerOrderItems = Order::where('user_id', Auth::user()->id)->latest()->where('status', $request->status)->simplePaginate(4);
 
         return view('costumer.order.index', compact('costumerOrderItems'));
         // return redirect()->route('user.order.index')->with('userOrderItems', $userOrderItems);
@@ -37,7 +37,7 @@ class OrderController extends Controller
 
     public function indexAdmin()
     {
-        $adminOrderItems = Order::latest()->paginate(4);
+        $adminOrderItems = Order::latest()->simplePaginate(4);
         // return view('admin.order.index', compact('adminOrderItems'));
         if (Auth::user()->usertype == "admin") {
             return view('admin.order.index', compact('adminOrderItems'));
@@ -50,7 +50,7 @@ class OrderController extends Controller
 
     public function adminOrderFiltered(Request $request)
     {
-        $adminOrderItems = Order::where('status', $request->status)->latest()->paginate(4);
+        $adminOrderItems = Order::where('status', $request->status)->latest()->simplePaginate(4);
         // return view('admin.order.index', compact('adminOrderItems'));
         if (Auth::user()->usertype == "admin") {
             return view('admin.order.index')->with(compact('adminOrderItems'));

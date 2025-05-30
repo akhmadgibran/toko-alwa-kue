@@ -2,7 +2,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row justify-content-center">
+<div class="container mt-5">
+<div class="row justify-content-center" style="height: 100vh;">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">Edit Product Category</div>
@@ -18,14 +19,15 @@
                         <label for="description">Description</label>
                         <textarea class="form-control" id="description" name="description" required>{{ $productCategory->description }}</textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="image">Image</label>
                         <input type="file" class="form-control-file" id="image" name="image">
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary mt-2">Update</button>
                 </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

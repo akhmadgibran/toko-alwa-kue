@@ -1,0 +1,47 @@
+/* Custom CSS for Pagination */
+
+/* To make the font not blue (e.g., black or inherit) */
+.pagination .page-item .page-link {
+    color: #333; /* Dark grey/black color */
+    /* Or use: color: inherit; to use the parent's text color */
+}
+
+/* To remove rounded borders */
+.pagination .page-item .page-link {
+    border-radius: 0 !important; /* Remove border-radius for all links */
+}
+
+/* If you also want to affect the active/hover states */
+.pagination .page-item.active .page-link,
+.pagination .page-item .page-link:hover,
+.pagination .page-item .page-link:focus {
+    border-radius: 0 !important; /* Ensure active/hover states also have no border-radius */
+}
+
+/* To remove rounded corners from the first and last items specifically */
+.pagination .page-item:first-child .page-link {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.pagination .page-item:last-child .page-link {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* Optional: Adjust border color if needed */
+.pagination .page-item .page-link {
+    border-color: #dee2e6; /* Bootstrap's default border color */
+}
+
+/* Optional: Adjust background color for active/hover states */
+.pagination .page-item.active .page-link {
+    background-color: #007bff; /* Example: Bootstrap primary blue */
+    border-color: #007bff;
+    color: #fff; /* White text for active state */
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #e9ecef; /* Light grey on hover */
+    border-color: #dee2e6;
+}

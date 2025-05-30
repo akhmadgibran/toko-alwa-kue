@@ -41,13 +41,17 @@
                                         <form action="{{ Auth::user()->usertype == 'admin' ? route('admin.category.destroy', $category->id) : route('superadmin.category.destroy', $category->id) }}" method="POST" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger mt-2">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+
+                    <div class="d-flex justify-content-center">
+                        {!! $categories->links() !!}
+                    </div>
                 </div>
             </div>
         </div>
