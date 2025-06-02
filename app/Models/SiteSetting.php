@@ -11,8 +11,11 @@ class SiteSetting extends Model
     protected $fillable = [
         'shop_name',
         'logo_path',
+        'home_background_path',
+        'about_banner_path',
         'shop_email',
         'slogan',
+        'promotion_paragraph',
         'about_us',
         'phone',
         'address',
@@ -21,6 +24,7 @@ class SiteSetting extends Model
         'twitter_name',
         'twitter_link',
         'instagram_name',
-        'instagram_link'
+        'instagram_link',
+        'copyright_text',
     ];
 }

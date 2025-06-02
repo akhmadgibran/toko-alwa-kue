@@ -2,7 +2,7 @@
     <div class="container-fluid d-flex justify-content-between align-items-center mx-5">
         <!-- Logo -->
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ asset('storage/' . $siteSettings->logo_path) }}" alt="{{ $siteSettings->shop_name }}" width="50" height="50">
+            <img src="{{ $siteSettings->logo_path ? asset('storage/' . $siteSettings->logo_path) : asset('default-images/logo-default.png') }}" alt="{{ $siteSettings->shop_name }}" width="50">
         </a>
 
         <!-- Toggle Button -->

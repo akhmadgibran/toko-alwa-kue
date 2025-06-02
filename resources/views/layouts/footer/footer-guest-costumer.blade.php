@@ -41,6 +41,24 @@
                                 <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->instagram_link }}" target="_blank" ><p>{{ $siteSettings->instagram_name }}</p></a>
                             </div>
                         </div>
+                        <div class="d-flex align-items-center">
+                            <img src="{{ asset('icons/devicon_twitter.png') }}" class="img-fluid me-3"
+                                style="max-width: 50px; max-height: 50px;" alt="twitter-icon">
+                            <div>
+                                <h4 class="mb-1">Twitter</h4>
+                                <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->twitter_link }}" target="_blank" ><p>{{ $siteSettings->twitter_name }}</p></a>
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex align-items-center">
+                            <img src="{{ asset('icons/ic_baseline-email.png') }}" class="img-fluid me-3"
+                                style="max-width: 50px; max-height: 50px;" alt="email-icon">
+                            <div>
+                                <h4 class="mb-1">Email</h4>
+                                <a class="mb-0 text-decoration-none text-black" href="mailto:{{ $siteSettings->shop_email }}" target="_blank" ><p>{{ $siteSettings->shop_email }}</p></a>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Location -->
@@ -63,7 +81,7 @@
     <div class="container">
         <div class="row w-100">
             <div class="col-12 d-flex justify-content-center">
-                <p class="text-white mb-0">All Right Reserved. &copy; 2025 Alwa Kue</p>
+                <p class="text-white mb-0">All Right Reserved. &copy; {{ $siteSettings->copyright_text }}</p>
             </div>
         </div>
     </div>

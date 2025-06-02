@@ -8,11 +8,11 @@
             <h2 class="title-script">About us</h2>
         </div>
         <div class="w-100 d-flex justify-content-center align-items-center mb-4" >
-            <img class="w-100  shadow-md" src="{{ asset('sample/carousel-1.jpeg') }}" style="" alt="">
+            <img class="w-100  shadow-md" src="{{ $siteSettings->about_banner_path ? asset('storage/' . $siteSettings->about_banner_path) : asset('default-images/about-banner-default.jpg') }}" style="" alt="">
         </div>
         <div class="row" >
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center" >
-            <img class="w-75" src="{{ asset('storage/' . $siteSettings->logo_path) }}" alt="logo {{ $siteSettings->shop_name }}" width="">
+            <img class="w-75" src="{{ $siteSettings->logo_path ? asset('storage/' . $siteSettings->logo_path) : asset('default-images/logo-default.png') }}" alt="logo {{ $siteSettings->shop_name }}" width="">
 
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center" >

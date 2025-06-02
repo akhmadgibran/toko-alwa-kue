@@ -32,9 +32,10 @@
                     </a>
                 </li>
 
+
                 <li class="nav-item" >
-                    <a class="nav-link" href="{{ route('superadmin.bestseller.index') }}">
-                        {{ __('Kelola Best Seller') }}
+                    <a class="nav-link" href="{{ route('superadmin.productpromotion.index') }}">
+                        {{ __('Kelola Product Promotion') }}
                     </a>
                 </li>
 

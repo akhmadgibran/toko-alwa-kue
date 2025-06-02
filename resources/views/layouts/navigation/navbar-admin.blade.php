@@ -28,8 +28,8 @@
                     </a>
                 </li>
                 <li class="nav-item" >
-                    <a class="nav-link" href="{{ route('admin.bestseller.index') }}">
-                        {{ __('Kelola Best Seller') }}
+                    <a class="nav-link" href="{{ route('admin.productpromotion.index') }}">
+                        {{ __('Kelola Product Promotion') }}
                     </a>
                 </li>
 
