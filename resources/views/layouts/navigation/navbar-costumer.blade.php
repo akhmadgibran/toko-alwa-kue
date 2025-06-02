@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+<nav id="mainNavbar" class="navbar navbar-expand-lg bg-body-tertiary shadow">
     <div class="container-fluid d-flex justify-content-between align-items-center mx-5">
         <!-- Logo -->
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ asset('logo/logo.png') }}" alt="Bootstrap" width="50" height="50">
+            <img src="{{ $siteSettings->logo_path ? asset('storage/' . $siteSettings->logo_path) : asset('default-images/logo-default.png') }}" alt="{{ $siteSettings->shop_name }}" width="50">
         </a>
 
         <!-- Toggle Button -->
@@ -19,6 +19,10 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('product.category') }}">Product</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('about') }}">About us</a>
                 </li>
 
             </ul>
@@ -57,4 +61,22 @@
         </div>
        
     </div>
+    
 </nav>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const navbar = document.getElementById('mainNavbar');
+        const navbarOffsetTop = navbar.offsetTop;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > navbarOffsetTop) {
+                navbar.classList.add('fixed-top');
+                document.body.style.paddingTop = navbar.offsetHeight + 'px'; // prevent jump
+            } else {
+                navbar.classList.remove('fixed-top');
+                document.body.style.paddingTop = '0';
+            }
+        });
+    });
+</script>

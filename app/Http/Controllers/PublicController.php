@@ -3,25 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Models\BestSeller;
+use App\Models\ShopStatus;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
+use App\Models\ProductPromotion;
 
 class PublicController extends Controller
 {
     //
     public function home()
     {
-        $bestSellerItems = BestSeller::all();
-        $bestSellerId1 = $bestSellerItems->where('id', 1)->first();
-        $bestSellerId2 = $bestSellerItems->where('id', 2)->first();
-        $bestSellerId3 = $bestSellerItems->where('id', 3)->first();
+        $statusToko = ShopStatus::all();
+
+        if ($statusToko[0]->name == 'open') {
+            $statusToko = 'open';
+        } else {
+            $statusToko = 'closed';
+        }
+
+        $productPromotionItems = ProductPromotion::all();
+        $productPromotionId1 = $productPromotionItems->where('id', 1)->first();
+        $productPromotionId2 = $productPromotionItems->where('id', 2)->first();
+        $productPromotionId3 = $productPromotionItems->where('id', 3)->first();
         // if best seller id "1" exist but have product_id column is null then make $bestSellerItems empty
-        if ($bestSellerItems->every(fn($item) => is_null($item->product_id))) {
-            $bestSellerItems = collect();
+        if ($productPromotionItems->every(fn($item) => is_null($item->product_id))) {
+            $productPromotionItems = collect();
         }
         $productCategories = ProductCategory::all();
         $siteSettings = SiteSetting::first();
-        return view("homeV2", compact("bestSellerItems", "productCategories", 'bestSellerId1', 'bestSellerId2', 'bestSellerId3', 'siteSettings'));
+        return view("home", compact("productPromotionItems", "productCategories", 'productPromotionId1', 'productPromotionId2', 'productPromotionId3', 'siteSettings'));
     }
 }

@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row w-100">
                     <div class="col-12 d-flex justify-content-center">
-                        <p class="text-white mb-0">All Right Reserved. &copy; 2025 Alwa Kue</p>
+                        <p class="text-white mb-0">All Right Reserved. &copy; {{ $siteSettings->copyright_text }}</p>
                     </div>
                 </div>
             </div>

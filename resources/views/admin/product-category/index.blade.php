@@ -2,16 +2,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container mt-5">
+    <div class="row justify-content-center" style="height: 100vh;">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Product Categories</div>
-                {{-- to create page small button --}}
-                <a href="{{ Auth::user()->usertype == 'admin' ? route('admin.category.create') : route('superadmin.category.create') }}" class="btn btn-primary">Create</a>
+
                 
 
                 <div class="card-body">
+                    {{-- to create page small button --}}
+                    <a href="{{ Auth::user()->usertype == 'admin' ? route('admin.category.create') : route('superadmin.category.create') }}" class="btn btn-primary">Create</a>
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -40,13 +41,17 @@
                                         <form action="{{ Auth::user()->usertype == 'admin' ? route('admin.category.destroy', $category->id) : route('superadmin.category.destroy', $category->id) }}" method="POST" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger mt-2">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+
+                    <div class="d-flex justify-content-center">
+                        {!! $categories->links() !!}
+                    </div>
                 </div>
             </div>
         </div>

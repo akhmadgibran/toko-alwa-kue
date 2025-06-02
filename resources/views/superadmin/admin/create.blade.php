@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-5" style="height: 100vh;">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">Create Admin</div>
@@ -38,9 +38,10 @@
                     </div>
                     <div class="form-group" >
                         <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" name="address">
+                        <textarea type="text" class="form-control" id="address" name="address">
+                        </textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary mt-2">Create</button>
                 </form>
             </div>
         </div>

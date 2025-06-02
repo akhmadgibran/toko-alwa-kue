@@ -3,18 +3,17 @@
 @extends('layouts.app')
 
 @section('content')
-<section id="payment-page" >
-    <div class="container" >
-        <div class="row" >
-            {{-- order summary --}}
-            <div>
-                <h3>Konfirmasi Pembayaran</h3>
-                <p>Kode Order :</p>
-                <p>{{ $order->costom_order_id }}</p>
-                <p>Anda akan melakukan transaksi sebelumnya sebesar Rp. {{ number_format($order->total_price, 0, ',', '.') }}</p>
-                <button id="pay-button" class="btn btn-primary" >Bayar Sekarang</button>
-            </div>
-        </div>
+<section id="payment-page" class="container" style="min-height: 70vh" >
+    <div class="d-flex justify-content-center align-items-center " style="min-height: 70vh"  >
+      {{-- order summary --}}
+      <div class="bg-card-primer p-3 rounded-0 responsive-card" style="width: 18rem;">
+          <h3>Konfirmasi Pembayaran</h3>
+          <p>Kode Order :</p>
+          <p>{{ $order->custom_order_id }}</p>
+          <p>Anda akan melakukan transaksi sebesar</p>
+          <p>Rp. {{ number_format($order->total_price, 0, ',', '.') }}</p>
+          <button id="pay-button" class="btn bg-button-primer w-100" >Bayar Sekarang</button>
+      </div>
     </div>
 </section>
 

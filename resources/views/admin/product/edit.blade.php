@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content') 
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-5" style="height: 100vh;">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">Edit Product</div>
@@ -31,12 +31,12 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="image">Image</label>
                         <input type="file" class="form-control-file" id="image" name="image">
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary mt-2">Update</button>
                 </form>
             </div>
         </div>

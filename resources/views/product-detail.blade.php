@@ -1,3 +1,5 @@
+
+
 {{-- the detail of the product --}}
 
 @extends('layouts.app')
@@ -8,33 +10,28 @@
 <section id="product-detail" class="py-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image" class="img-fluid rounded rounded-4">
+            <div class="col-md-6">
+                <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image" class="img-fluid">
             </div>
-            <div class="col-md-4">
-                <h2>{{ $product->name }}</h2>
+            <div class="col-md-6">
+                <h2 class="quote-script" >{{ $product->name }}</h2>
+                <h3 style="font-weight: bold">Rp. {{ number_format($product->price, 0, ',', '.') }}</h3>
                 <p>{{ $product->description }}</p>
-                <h3>Rp. {{ number_format($product->price, 0, ',', '.') }}</h3>
+
+            <div class="d-flex flex-row mb-2">
+                <div class="quantity-selector">
+                    <button type="button" onclick="updateQuantity(-1)">−</button>
+                    <input type="text" id="quantity" value="1" readonly>
+                    <button type="button" onclick="updateQuantity(1)">+</button>
+                </div>
+
+                <div class="d-flex align-items-center ms-3">
+                    <p id="total-price" class="mb-0">
+                        Rp. {{ number_format($product->price * 1, 0, ',', '.') }}
+                    </p>
+                </div>
             </div>
-            <div class="col-md-4">
 
-               
-
-                <div class="input-group mb-3" style="width: 50%" >
-                    <div class="input-group-prepend" >
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon1" onclick="updateQuantity(-1)" >-</button>
-                    </div>
-                    <input type="text" class="form-control" id="quantity" placeholder="" aria-label="" aria-describedby="button-addon1" value="1" readonly>
-                    <div class="input-group-append" >
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="updateQuantity(1)" >+</button>
-                    </div>
-
-                </div>
-
-                <div>
-                    {{-- calculate quantity * price --}}
-                    <p id="total-price" class="">Rp. {{ number_format($product->price * 1, 0, ',', '.') }}</p>
-                </div>
 
                 <script>
                     let price = {{ $product->price }};
@@ -58,18 +55,16 @@
                 </script>
                             
             {{-- if not logged in, then add to cart button will route to login --}}
-            @if (!Auth::check())
-                <input type="hidden" name="quantity" id="hidden-quantity" value="1">
-                <a href="{{ route('login') }}" class="btn btn-primary">Add to Cart</a>
-            @else
+            @if (!Auth::check() && $statusToko->name == 'close' || Auth::check() && $statusToko->name == 'closed')
+                <a href="#" class="btn bg-button-primer w-100 rounded-5 disabled">Add to Cart</a>
+            @elseif (Auth::check() && $statusToko->name == 'open')
                 <form action="{{ route('costumer.cart.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <input type="hidden" name="quantity" id="hidden-quantity" value="1">
-                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    <button type="submit" class="btn bg-button-primer w-100 rounded-5">Add to Cart</button>
                 </form>
             @endif
-
             </div>
 
         </div>

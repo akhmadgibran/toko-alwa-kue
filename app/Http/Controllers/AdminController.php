@@ -48,6 +48,7 @@ class AdminController extends Controller
         User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
+            'email_verified_at' => now(),
             'password' => $validatedData['password'],
             'phone' => $validatedData['phone'],
             'usertype' => 'admin',

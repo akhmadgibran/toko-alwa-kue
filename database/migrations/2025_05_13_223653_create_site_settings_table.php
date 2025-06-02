@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('site_settings', function (Blueprint $table) {
             $table->id();
             $table->string('shop_name')->nullable()->default('Shop Name');
-            $table->string('logo_path')->nullable()->default('logo.png');
+            $table->string('logo_path')->nullable();
+            $table->string('home_background_path')->nullable();
+            $table->string('about_banner_path')->nullable();
             $table->string('shop_email')->nullable()->default('shop@gmail.com');
             $table->string('slogan')->nullable()->default('Shop Slogan');
             $table->longText('about_us')->nullable()->default('About Us');
+            $table->string('promotion_paragraph')->nullable();
             $table->string('phone')->nullable()->default('0123456789');
             $table->string('address')->nullable()->default('Shop Address');
             $table->string('facebook_name')->nullable()->default('Facebook Name');
@@ -26,6 +29,8 @@ return new class extends Migration
             $table->string('twitter_link')->nullable()->default('https://www.twitter.com');
             $table->string('instagram_name')->nullable()->default('Instagram Name');
             $table->string('instagram_link')->nullable()->default('https://www.instagram.com');
+            $table->string('copyright_text')->nullable();
+
 
 
             $table->timestamps();

@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             OrderStatusSeeder::class,
             BestSellerSeeder::class,
             SiteSettingSeeder::class,
+            ProductPromotionSeeder::class
         ]);
     }
 }

@@ -3,7 +3,7 @@
 
 @section('content')
 <section id="index-product-admin" > 
-    <div class="container py-5">
+    <div class="container mt-5">
         <div class="row justify-content-center " style="height: 100vh;" >
             <div class="col-md-8">
                 <div class="card">
@@ -37,13 +37,17 @@
                                             <form action="{{ Auth::user()->usertype == 'admin' ? route('admin.product.destroy', $product->id) : route('superadmin.product.destroy', $product->id) }}" method="POST" style="display: inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger mt-2">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <div class="d-flex justify-content-center">
+                            {{ $products->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
