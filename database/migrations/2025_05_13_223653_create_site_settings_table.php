@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('about_banner_path')->nullable();
             $table->string('shop_email')->nullable()->default('shop@gmail.com');
             $table->string('slogan')->nullable()->default('Shop Slogan');
-            $table->longText('about_us')->nullable()->default('About Us');
+            $table->longText('about_us')->nullable();
             $table->string('promotion_paragraph')->nullable();
             $table->string('phone')->nullable()->default('0123456789');
             $table->string('address')->nullable()->default('Shop Address');
