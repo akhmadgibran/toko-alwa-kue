@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ShopStatusSeeder::class,
             OrderStatusSeeder::class,
-            BestSellerSeeder::class,
             SiteSettingSeeder::class,
             ProductPromotionSeeder::class
         ]);
