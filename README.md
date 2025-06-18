@@ -1,66 +1,144 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyek Toko Kue Alwa (`toko-alwa-kue`)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Selamat datang di repository Toko Kue Alwa! Ini adalah aplikasi web pemesanan kue online yang dibangun menggunakan framework Laravel. Dokumen ini akan memandu Anda melalui proses instalasi, struktur project, dan cara berkontribusi.
 
-## About Laravel
+## 1. Struktur Repository
+Struktur folder dan file pada project ini mengikuti standar framework Laravel. Berikut adalah deskripsi singkat dari beberapa direktori dan file yang paling penting:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* `/app` - Berisi semua logika inti aplikasi, termasuk Models, Controllers, dan Providers.
+* `/config` - Berisi semua file konfigurasi aplikasi (database, email, service pihak ketiga).
+* `/database` - Berisi file-file migrasi (skema tabel) dan seeder (data awal).
+* `/public` - *Document root* untuk aplikasi. Aset seperti CSS, JS, dan gambar yang sudah di-compile juga diletakkan di sini.
+* `/resources` - Berisi file-file "mentah" seperti Blade templates (`/views`), file JavaScript (`/js`), dan file CSS/SCSS (`/css`).
+* `/routes` - Berisi semua definisi rute URL aplikasi (`web.php` dan `api.php`).
+* `/storage` - Berisi file-file yang di-generate oleh framework, seperti logs, cache, dan file yang di-upload oleh pengguna (melalui *symlink*).
+* `.env` - File konfigurasi *environment* lokal yang berisi kredensial dan variabel sensitif.
+* `artisan` - Command-line interface (CLI) yang disertakan dengan Laravel.
+* `composer.json` - Mendefinisikan semua *dependency* PHP.
+* `package.json` - Mendefinisikan semua *dependency* JavaScript/CSS.
+* `vite.config.js` - File konfigurasi untuk Vite, *build tool* front-end.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 2. Panduan Setup Lokal
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Berikut adalah panduan untuk melakukan instalasi dan menjalankan project ini di lingkungan lokal.
 
-## Learning Laravel
+**Prasyarat:**
+* PHP: **8.4**
+* MySQL: **8.0.30** (atau yang kompatibel)
+* Composer
+* Node.js & NPM
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Langkah-langkah Instalasi:**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1.  **Clone Repository**
+    Buka terminal dan jalankan perintah berikut:
+    ```bash
+    git clone [https://github.com/akhmadgibran/toko-alwa-kue.git](https://github.com/akhmadgibran/toko-alwa-kue.git)
+    cd toko-alwa-kue
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2.  **Install Dependencies**
+    Install semua paket PHP (via Composer) dan JavaScript (via NPM).
+    ```bash
+    composer install
+    npm install
+    ```
 
-## Laravel Sponsors
+3.  **Setup Environment File (.env)**
+    Salin file contoh menjadi file environment lokalmu.
+    ```bash
+    cp .env.example .env
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+4.  **Generate Application Key**
+    Setiap aplikasi Laravel membutuhkan kunci enkripsi yang unik.
+    ```bash
+    php artisan key:generate
+    ```
 
-### Premium Partners
+5.  **Konfigurasi Environment (.env)**
+    Buka file `.env` yang baru dibuat dan sesuaikan konfigurasinya.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    **a. Koneksi Database:**
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=alwa_kue_website
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
+    > Pastikan kamu sudah membuat database dengan nama `alwa_kue_website` di MySQL lokalmu.
 
-## Contributing
+    **b. Konfigurasi Email (Mailer):**
+    Untuk pengembangan lokal, disarankan menggunakan layanan seperti [Mailtrap](https://mailtrap.io/) agar tidak mengirim email sungguhan.
+    ```env
+    MAIL_MAILER=smtp
+    MAIL_HOST=smtp.mailtrap.io
+    MAIL_PORT=2525
+    MAIL_USERNAME=mailtrap_user_kamu
+    MAIL_PASSWORD=mailtrap_pass_kamu
+    MAIL_FROM_ADDRESS="hello@example.com"
+    MAIL_FROM_NAME="${APP_NAME}"
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    **c. Konfigurasi Midtrans (Payment Gateway):**
+    Gunakan *key* dari akun Sandbox Midtrans-mu untuk pengujian.
+    > **PENTING:** Set `MIDTRANS_IS_PRODUCTION` ke `false` untuk lingkungan development!
+    ```env
+    MIDTRANS_SERVER_KEY=SB-Mid-server-xxxxxxxxxxxx
+    MIDTRANS_CLIENT_KEY=SB-Mid-client-xxxxxxxxxxxx
+    MIDTRANS_IS_PRODUCTION=false
+    ```
 
-## Code of Conduct
+6.  **Jalankan Migrasi Database**
+    Perintah ini akan membuat semua tabel di database. Tambahkan `--seed` jika kamu ingin mengisi data awal dari Seeder.
+    ```bash
+    php artisan migrate --seed
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+7.  **Buat Storage Link**
+    Perintah ini penting agar file yang di-upload (misal: gambar produk kue) bisa diakses dari web.
+    ```bash
+    php artisan storage:link
+    ```
 
-## Security Vulnerabilities
+8.  **Jalankan Aplikasi**
+    Kamu perlu menjalankan dua perintah di dua terminal terpisah:
+    * **Terminal 1: Jalankan Vite Dev Server** (untuk compile CSS/JS secara otomatis)
+        ```bash
+        npm run dev
+        ```
+    * **Terminal 2: Jalankan Laravel Server**
+        ```bash
+        php artisan serve
+        ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    Sekarang aplikasi sudah bisa diakses di **http://127.0.0.1:8000**.
 
-## License
+## 3. Branching Strategy
+Project ini menggunakan strategi percabangan **Git Flow** untuk mengelola kode.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* `main`: Menyimpan kode produksi yang stabil. Hanya menerima *merge* dari `release` atau `hotfix`.
+* `develop`: *Branch* utama untuk pengembangan. Semua fitur baru diintegrasikan ke sini.
+* `feature/*`: Dibuat dari `develop` untuk mengerjakan fitur baru (misal: `feature/payment-report`). Di-*merge* kembali ke `develop` setelah selesai.
+* `release/*`: Dibuat dari `develop` untuk persiapan rilis. Setelah siap, di-*merge* ke `main` dan `develop`.
+* `hotfix/*`: Dibuat dari `main` untuk perbaikan *bug* darurat di produksi. Di-*merge* kembali ke `main` dan `develop`.
+
+![image](https://github.com/user-attachments/assets/5b7c573e-f2f2-47f3-90fe-16c0d136eb26)
+
+
+## 4. Contributing Guidelines
+
+**Alur Kontribusi:**
+1.  Selalu mulai dari *branch* `develop` yang paling baru (`git pull origin develop`).
+2.  Buat *branch* baru untuk fitumu: `git checkout -b feature/nama-fitur-kamu`.
+3.  Kerjakan kodemu dan buat *commit* dengan pesan yang jelas (misal: `feat: Add cake discount functionality`).
+4.  Setelah selesai, dorong (*push*) *branch*-mu ke remote: `git push origin feature/nama-fitur-kamu`.
+5.  Buat *Pull Request* (PR) dari *branch* `feature` kamu ke *branch* `develop`.
+6.  Tunggu proses *code review*. Jika ada revisi, lakukan di *branch* yang sama.
+7.  Setelah disetujui, PR akan di-*merge* ke `develop`.
+
+> ### PERINGATAN KEAMANAN!
+> Jangan pernah melakukan *commit* untuk file `.env` ke dalam repository. File ini berisi informasi sensitif seperti *password* email dan *API key*. File `.gitignore` sudah dikonfigurasi untuk mengabaikan file `.env`.
+
