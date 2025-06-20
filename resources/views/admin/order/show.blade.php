@@ -4,19 +4,19 @@
 
 @section('content')
 
-<section id="cart" class="py-5" style="min-height: 70vh" >
+<section id="cart" class="py-5" style="min-height: 90vh" >
     <div class="container" >
             <div class="row" >
                         {{-- order table --}}
             <div class="col-md-7 col-sm-12 " >
-                <h3>Item Order</h3>
-                <table class="table">
+                <h3 class="title-script" >Item Order</h3>
+                <table class="table normal-font table-transparent d-none d-lg-table">
                     <thead>
                         <tr>
                             {{-- <th scope="col">No</th> --}}
                             <th scope="col">Item</th>
-                            {{-- <th scope="col">Harga</th> --}}
-                            <th scope="col">Jumlah</th>
+                            <th scope="col">Harga</th>
+                            <th scope="col" class="text-center">Jumlah</th>
                             <th scope="col">Subtotal</th>
                             {{-- <th scope="col">Aksi</th> --}}
                         </tr>
@@ -24,18 +24,10 @@
                     <tbody>
                         @foreach ($adminOrderDetail as $Item)
                             <tr>
-                                {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                <td>{{ $Item->product ? $Item->product->name : 'Product Not Found' }}</td>
-                                {{-- <td>Rp. {{ $Item->product->price }}</td> --}}
-                                <td>{{ $Item->quantity }}</td>
+                                <td>{{ $Item->product_name  }}</td>
+                                <td>Rp. {{ $Item->product_price }}</td>
+                                <td class="text-center">{{ $Item->quantity }}</td>
                                 <td>Rp. {{ number_format($Item->subtotal, 0, ',', '.') }}</td>
-                                {{-- <td>
-                                    <form action="{{ route('costumer.cart.destroy', $cartItem->id) }}" method="POST" style="display: inline-block">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Hapus</button>
-                                    </form>
-                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>
@@ -48,11 +40,9 @@
                 <div class="p-3">
                     <h3>Ringkasan Order</h3>
 
-                    <table class="table">
+                    <table class="table normal-font table-transparent">
                         <thead>
                             <tr>
-                                {{-- <th scope="col">Subtotal</th> --}}
-                                {{-- <th scope="col">Ongkir</th> --}}
                                 <th scope="col">Order Total</th>
                             </tr>
                         </thead>
@@ -60,16 +50,19 @@
                             <tr>
                                 {{-- <td>Rp. {{ $subTotal }}</td> --}}
                                 {{-- <td>Rp. {{ $ongkir }}</td> --}}
-                                <td>Rp. {{ $adminOrderItem->custom_order_id }}</td>
+                                <td>Rp. {{ number_format($adminOrderItem->total_price, 0, ',', '.') }}</td>
                             </tr>
                         </tbody>
                     </table>
                     <p>Kode Order :</p>
-                    <p> {{ $adminOrderItem->custom_order_id }}</p>
+                    <p class="faded-border"> {{ $adminOrderItem->custom_order_id }}</p>
                     {{-- <p>Status : {{ $adminOrderItem->status }}</p> --}}
-                    <p>Alamat : {{ $adminOrderItem->address }}</p>
+                    <p>Nomor Telepon : </p>
+                    <p class="faded-border"> {{ $adminOrderItem->user->phone }} </p>
+                    <p>Alamat : </p>
+                    <p class="faded-border"> {{ $adminOrderItem->address }} </p>
                     <p>Catatan untuk penjual :</p>
-                    <p> {{ $adminOrderItem->buyer_note }}</p>
+                    <p class="faded-border">{{ $adminOrderItem->buyer_note ? $adminOrderItem->buyer_note : 'Belum ada catatan' }}</p>
 
                     @php
                         $actionRoute = Auth::user()->usertype == 'admin'
@@ -96,7 +89,7 @@
                             {{ $adminOrderItem->seller_note }}
                         </textarea>
                         {{-- submit button --}}
-                        <button type="submit" class="btn btn-primary w-100">Update</button>
+                        <button type="submit" class="btn bg-button-primer w-100">Update</button>
                     </form>
 
 

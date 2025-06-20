@@ -3,20 +3,21 @@
 @extends('layouts.app')
 
 @section('content')
-<section id="payment-page" >
-    <div class="container" >
-        <div class="row" >
+<section id="payment-page"  class="container" style="min-height: 70vh" >
+
+        <div class="d-flex justify-content-center align-items-center " style="min-height: 70vh" >
             {{-- order summary --}}
-            <div>
+            <div class="bg-card-primer p-3 rounded-0 responsive-card" style="width: 18rem;">
                 <h3>Konfirmasi Pembayaran Tertunda</h3>
                 <p>Kode Order :</p>
                 {{-- {{ dd($order) }} --}}
-                <p>{{ $order->costom_order_id }}</p>
-                <p>Anda akan melakukan transaksi yang sebelumnya tertunda sebesar Rp. {{ number_format($order->total_price, 0, ',', '.') }}</p>
-                <button id="pay-button" class="btn btn-primary" >Bayar Sekarang</button>
+                <p>{{ $order->custom_order_id }}</p>
+                <p>Anda akan melakukan transaksi yang sebelumnya tertunda sebesar </p>
+                <p>Rp. {{ number_format($order->total_price, 0, ',', '.') }}</p>
+                <button id="pay-button" class="btn bg-button-primer w-100" >Bayar Sekarang</button>
             </div>
         </div>
-    </div>
+   
 </section>
 
   <!-- @TODO: You can add the desired ID as a reference for the embedId parameter. -->
@@ -25,10 +26,13 @@
   <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
   {{-- <script type="text/javascript" src="https://app.stg.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script> --}}
       <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
-    <script type="text/javascript"
-      src="https://app.sandbox.midtrans.com/snap/snap.js"
-      data-client-key="{{ config('midtrans.client_key') }}"></script>
+    <!--<script type="text/javascript"-->
+    <!--  src="https://app.midtrans.com/snap/snap.js"-->
+    <!--  data-client-key="{{ config('midtrans.client_key') }}"></script>-->
     <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
+    <script type="text/javascript"
+    src="https://app.sandbox.midtrans.com/snap/snap.js" 
+    data-client-key="{{ config('midtrans.client_key') }}"></script>
 
        <script type="text/javascript">
       // For example trigger on button clicked, or any time you need

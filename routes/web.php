@@ -4,19 +4,33 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductControllers;
-use App\Http\Controllers\BestSellerController;
+use App\Http\Controllers\SuperadminDashboard;
 use App\Http\Controllers\ShopStatusController;
+use App\Http\Controllers\SiteSettingController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductPromotionController;
+use App\Http\Controllers\SuperadminDashboardController;
 
-Route::get('/', function () {
-    return view('homeV2');
+Route::controller(PublicController::class)->group(function () {
+    Route::get('/', 'home')->name('home');
+    Route::get('/home', 'home')->name('home');
+    Route::get('product/category', [ProductCategoryController::class, 'index'])->name('product.category');
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('product/category/{id}', 'index')->name('product.index');
+        Route::get('product/{id}', 'show')->name('product.show');
+    });
+
+    Route::get('/about', function () {
+        return view('about-us');
+    })->name('about');
 });
-Route::get('/homebuild', function () {
-    return view('homeV2');
-});
+
+
 
 Route::get('/footerbuild', function () {
     return view('layouts.footer.footer-guest-costumer');
@@ -26,23 +40,6 @@ Route::get('cartBuild', function () {
     return view('costumer.cart.index');
 });
 
-Route::get('product/category', [ProductCategoryController::class, 'index'])->name('product.category');
-// Route::get('/product/category/{id}', [ProductControllers::class, 'index'])->name('user.product.index');
-Route::controller(ProductController::class)->group(function () {
-    Route::get('product/category/{id}', 'index')->name('product.index');
-    Route::get('product/{id}', 'show')->name('product.show');
-});
-
-Route::get('/home', function () {
-    return view('homeV2');
-})->name('home');
-
-// Route::get('/home', function () {
-//     return view('home');
-// })->name('home')->middleware('auth', 'verified');
-
-// Route::view('/profile/edit', 'profile.edit')->middleware('auth', 'verified')->name('profile.edit');
-// Route::view('/profile/password', 'profile.password')->middleware('auth', 'verified')->name('profile.password');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -50,7 +47,11 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/profile/password', 'profile.password')->name('profile.password');
 });
 
-Route::middleware(['auth', 'costumer'])->group(function () {
+Route::middleware(['auth', 'costumer', 'verified'])->group(function () {
+
+    Route::get('/welcome', function () { // Or use a dedicated controller
+        return view('costumer.dashboard'); // Create this view: resources/views/costumer/dashboard.blade.php
+    })->name('costumer.dashboard');
 
     // Route group for cart
     Route::controller(CartController::class)->group(function () {
@@ -79,11 +80,15 @@ Route::middleware(['auth', 'costumer'])->group(function () {
 });
 
 // group route usertype admin
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin', 'verified'])->group(function () {
 
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    // Route::get('/admin/dashboard', function () {
+    //     return view('admin.dashboard');
+    // })->name('admin.dashboard');
+
+    Route::controller(AdminDashboardController::class)->group(function () {
+        Route::get('admin/dashboard', 'index')->name('admin.dashboard');
+    });
 
     Route::controller(ProductCategoryController::class)->group(function () {
         Route::get('admin/category', 'adminIndex')->name('admin.category.index');
@@ -110,13 +115,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::put('admin/shopstatus', 'update')->name('admin.shopstatus.update');
     });
 
-    Route::controller(BestSellerController::class)->group(function () {
-        Route::get('admin/bestseller', 'index')->name('admin.bestseller.index');
-        // Route::get('/bestseller/create', 'create')->name('admin.bestseller.create');
-        // Route::post('/bestseller', 'store')->name('admin.bestseller.store');
-        // Route::get('/bestseller/{id}/edit', 'edit')->name('admin.bestseller.edit');
-        Route::put('admin/bestseller', 'update')->name('admin.bestseller.update');
-        // Route::delete('/bestseller/{id}', 'destroy')->name('admin.bestseller.destroy');
+
+    Route::controller(ProductPromotionController::class)->group(function () {
+        Route::get('admin/productpromotion', 'index')->name('admin.productpromotion.index');
+        Route::patch('admin/productpromotion/{id}', 'update')->name('admin.productpromotion.update');
     });
 
     Route::controller(OrderController::class)->group(function () {
@@ -127,11 +129,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 });
 
-Route::middleware(['auth', 'superadmin'])->group(function () {
+Route::middleware(['auth', 'superadmin', 'verified'])->group(function () {
 
-    Route::get('/superadmin/dashboard', function () {
-        return view('superadmin.dashboard');
-    })->name('superadmin.dashboard');
+
+    Route::controller(SuperadminDashboardController::class)->group(function () {
+        Route::get('/superadmin/dashboard', 'index')->name('superadmin.dashboard');
+    });
 
     Route::controller(AdminController::class)->group(function () {
         Route::get('superadmin/admin', 'index')->name('superadmin.admin.index');
@@ -167,13 +170,10 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
         Route::put('/superadmin/shopstatus', 'update')->name('superadmin.shopstatus.update');
     });
 
-    Route::controller(BestSellerController::class)->group(function () {
-        Route::get('/superadmin/bestseller', 'index')->name('superadmin.bestseller.index');
-        // Route::get('/bestseller/create', 'create')->name('admin.bestseller.create');
-        // Route::post('/bestseller', 'store')->name('admin.bestseller.store');
-        // Route::get('/bestseller/{id}/edit', 'edit')->name('admin.bestseller.edit');
-        Route::put('/superadmin/bestseller', 'update')->name('superadmin.bestseller.update');
-        // Route::delete('/bestseller/{id}', 'destroy')->name('admin.bestseller.destroy');
+
+    Route::controller(ProductPromotionController::class)->group(function () {
+        Route::get('/superadmin/productpromotion', 'index')->name('superadmin.productpromotion.index');
+        Route::patch('/superadmin/productpromotion/{id}', 'update')->name('superadmin.productpromotion.update');
     });
 
     Route::controller(OrderController::class)->group(function () {
@@ -182,13 +182,9 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
         Route::get('/superadmin/order/{custom_order_id}', 'adminShowOrder')->name('superadmin.order.show');
         Route::put('/superadmin/order/{custom_order_id}', 'adminUpdateOrder')->name('superadmin.order.update');
     });
+
+    Route::controller(SiteSettingController::class)->group(function () {
+        Route::get('/superadmin/site-setting', 'index')->name('superadmin.site-setting.index');
+        Route::put('/superadmin/site-setting', 'update')->name('superadmin.site-setting.update');
+    });
 });
-// Route::put('/product/{id}', [ProductController::class, 'update'])->name('admin.product.update');
-
-// Route::get('/login', function () {
-//     return view('auth.login');
-// })->name('login');
-
-// Route::get('/register', function () {
-//     return view('auth.register');
-// })->name('register');

@@ -1,7 +1,7 @@
 {{-- navbar for superadmin --}}
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ route('superadmin.dashboard') }}">
             {{ config('app.name', 'Kue Alwa') }}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -32,6 +32,19 @@
                     </a>
                 </li>
 
+
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ route('superadmin.productpromotion.index') }}">
+                        {{ __('Kelola Product Promotion') }}
+                    </a>
+                </li>
+
+                <li class="nav-item" >
+                    <a class="nav-link" href="{{ route('superadmin.site-setting.index') }}">
+                        {{ __('Kelola Website') }}
+                    </a>
+                </li>
+
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -56,6 +69,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a href="{{ route('profile.edit') }}" class="dropdown-item">Profile</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
@@ -71,4 +85,5 @@
             </ul>
         </div>
     </div>
+ 
 </nav>

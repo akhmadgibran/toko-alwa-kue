@@ -16,6 +16,7 @@ use App\Actions\Fortify\UpdateUserPassword;
 use Illuminate\Support\Facades\RateLimiter;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
+use Laravel\Fortify\Contracts\RegisterResponse;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -46,8 +47,22 @@ class FortifyServiceProvider extends ServiceProvider
                 } elseif ($user->usertype == 'admin') {
                     return redirect()->route('admin.dashboard');
                 } else {
-                    return redirect('/home');
+                    return redirect()->route('costumer.dashboard'); // Redirect to a new customer dashboard route
                 }
+            }
+        });
+
+
+        // ! for custom redirect after registration  
+        $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
+            public function toResponse($request)
+            {
+                // Any user successfully completing public registration is redirected
+                // to the customer dashboard flow. The `CreateNewUser` action
+                // should ensure they are assigned the 'costumer' usertype.
+                // The 'verified' middleware on 'costumer.dashboard' route will then
+                // handle the verification prompt if needed.
+                return redirect()->route('costumer.dashboard');
             }
         });
     }

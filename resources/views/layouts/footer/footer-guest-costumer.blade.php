@@ -1,6 +1,10 @@
+@php
+        $siteSettings = \App\Models\SiteSetting::first();
+@endphp
+
 <footer id="footer">
     <div class="row">
-        <div class="col-12 bg-body-secondary">
+        <div class="col-12 bg-footer-primer">
             <div class="container">
                 <div class="row p-5">
                     <!-- Telephone Section -->
@@ -12,7 +16,7 @@
                             <!-- Text -->
                             <div>
                                 <h4 class="mb-1">Telephone</h4>
-                                <p class="mb-0">085875206802</p>
+                                <p class="mb-0">{{ $siteSettings->phone }}</p>
                             </div>
                         </div>
                     </div>
@@ -25,7 +29,7 @@
                                 style="max-width: 50px; max-height: 50px;" alt="facebook-icon">
                             <div>
                                 <h4 class="mb-1">Facebook</h4>
-                                <p class="mb-0">Alwa kue</p>
+                                <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->facebook_link }}" target="_blank" ><p>{{ $siteSettings->facebook_name }}</p></a>
                             </div>
                         </div>
                         {{-- instagram --}}
@@ -34,7 +38,25 @@
                                 style="max-width: 50px; max-height: 50px;" alt="instagram-icon">
                             <div>
                                 <h4 class="mb-1">Instagram</h4>
-                                <p class="mb-0">Alwa_kue</p>
+                                <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->instagram_link }}" target="_blank" ><p>{{ $siteSettings->instagram_name }}</p></a>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img src="{{ asset('icons/devicon_twitter.png') }}" class="img-fluid me-3"
+                                style="max-width: 50px; max-height: 50px;" alt="twitter-icon">
+                            <div>
+                                <h4 class="mb-1">Twitter</h4>
+                                <a class="mb-0 text-decoration-none text-black" href="{{ $siteSettings->twitter_link }}" target="_blank" ><p>{{ $siteSettings->twitter_name }}</p></a>
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex align-items-center">
+                            <img src="{{ asset('icons/ic_baseline-email.png') }}" class="img-fluid me-3"
+                                style="max-width: 50px; max-height: 50px;" alt="email-icon">
+                            <div>
+                                <h4 class="mb-1">Email</h4>
+                                <a class="mb-0 text-decoration-none text-black" href="mailto:{{ $siteSettings->shop_email }}" target="_blank" ><p>{{ $siteSettings->shop_email }}</p></a>
                             </div>
                         </div>
                     </div>
@@ -46,7 +68,7 @@
                                 style="max-width: 50px; max-height: 50px;" alt="location-icon">
                             <div>
                                 <h4 class="mb-1">Location</h4>
-                                <p class="mb-0">Sirah Kandang, Jl. Sebalor, Kec. Bandung, Kabupaten Tulungagung, Jawa Timur 66274.</p>
+                                <p class="mb-0">{{ $siteSettings->address }}</p>
                             </div>
                         </div>
                     </div>
@@ -59,7 +81,7 @@
     <div class="container">
         <div class="row w-100">
             <div class="col-12 d-flex justify-content-center">
-                <p class="text-white mb-0">All Right Reserved. &copy; 2025 Alwa Kue</p>
+                <p class="text-white mb-0">All Right Reserved. &copy; {{ $siteSettings->copyright_text }}</p>
             </div>
         </div>
     </div>

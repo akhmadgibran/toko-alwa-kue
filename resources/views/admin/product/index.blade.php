@@ -3,8 +3,8 @@
 
 @section('content')
 <section id="index-product-admin" > 
-    <div class="container py-5">
-        <div class="row justify-content-center " style="height: 100vh;" >
+    <div class="container mt-5">
+        <div class="row justify-content-center " style="min-height: 100vh;" >
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Products</div>
@@ -28,22 +28,26 @@
                                     <tr>
                                         <th scope="row">{{ $product->id }}</th>
                                         <td>{{ $product->name }}</td>
-                                        <td>{{ $product->description }}</td>
+                                        <td>{{ Str::words($product->description, 4, '...') }}</td>
                                         <td>{{ $product->category->name }}</td>
                                         <td>Rp. {{ $product->price }}</td>
-                                        <td><img style="width: 50%" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}"></td>
+                                        <td><img class="product-image-square" style="width: 25%" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}"></td>
                                         <td>
                                             <a href="{{ Auth::user()->usertype == 'admin' ? route('admin.product.edit', $product->id) : route('superadmin.product.edit', $product->id) }}" class="btn btn-primary">Edit</a>
                                             <form action="{{ Auth::user()->usertype == 'admin' ? route('admin.product.destroy', $product->id) : route('superadmin.product.destroy', $product->id) }}" method="POST" style="display: inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger mt-2">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <div class="d-flex justify-content-center">
+                            {{ $products->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

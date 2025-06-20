@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\BestSeller;
 use App\Models\User;
 use App\Models\OrderStatus;
+use App\Models\SiteSetting;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\ShopStatusSeeder;
@@ -22,7 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             ShopStatusSeeder::class,
-            OrderStatusSeeder::class
+            OrderStatusSeeder::class,
+            SiteSettingSeeder::class,
+            ProductPromotionSeeder::class
         ]);
     }
 }

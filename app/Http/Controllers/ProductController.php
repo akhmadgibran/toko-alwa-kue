@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class ProductController extends Controller
     public function adminIndex()
     {
         // retrieve all product
-        $products = Product::all();
+        $products = Product::simplePaginate(6);
 
         // pass products to view
         return view('admin.product.index', compact('products'));
@@ -24,7 +25,8 @@ class ProductController extends Controller
     public function index($id)
     {
         // retrieve data product by category id
-        $products = Product::where('category_id', $id)->get();
+        $products = Product::where('category_id', $id)->simplePaginate(6);
+
         return view('products-page', compact('products'));
     }
 
@@ -55,7 +57,7 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:product_categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image',
         ]);
 
         // Upload image to storage and get the path

@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-5" style="height: 100vh;">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">Create Product</div>
@@ -21,9 +21,10 @@
                         <label for="price">Price</label>
                         <input type="number" step="0.01" class="form-control" id="price" name="price" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="image">Image</label>
                         <input type="file" class="form-control-file" id="image" name="image" required>
+                        <p class="text-danger mb-0" style="font-size: 11px; mb-0">*ukuran file max 2MB</p>
                     </div>
                     <div class="form-group">
                         <label for="category_id">Category</label>
@@ -35,7 +36,7 @@
                         </select>
                         
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary mt-2">Create</button>
                 </form>
             </div>
         </div>

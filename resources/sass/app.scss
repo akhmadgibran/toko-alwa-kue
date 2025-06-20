@@ -1,2 +1,108 @@
 @use "bootstrap/scss/bootstrap";
 @use "pages/guest-home.scss";
+@use "paginator/paginator.scss";
+@use "fonts/fonts.scss";
+@use "tables/tables.scss";
+@use "navbar-alert/navbar-alert.scss";
+@import url("https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Rouge+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Rouge+Script&family=Sawarabi+Gothic&display=swap");
+
+// start background color
+.bg-primer-light {
+    background-color: #efecea; /* A lighter shade of secondary */
+}
+
+.bg-footer-primer {
+    background-color: #aec5c6; /* A lighter shade of secondary */
+}
+.bg-button-primer {
+    background-color: #b9d8d9; /* A lighter shade of secondary */
+}
+.bg-button-primer:hover {
+    background-color: #aec5c6; /* A lighter shade of secondary */
+}
+
+.bg-card-primer {
+    background-color: #f5f4f4; /* A lighter shade of secondary */
+}
+
+.product-image-square {
+    width: 100%; /* Make the image fill its container's width */
+    aspect-ratio: 1 / 1; /* Enforce a 1:1 aspect ratio (a square) */
+    object-fit: cover; /* Cover the area, cropping the image to fit without distortion */
+}
+
+// end background color
+
+/* Add this to your CSS file */
+.slider::-webkit-scrollbar {
+    height: 8px;
+}
+
+.slider::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.slider::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.slider::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+@media (min-width: 768px) {
+    .responsive-card {
+        width: 25rem !important;
+    }
+}
+
+.responsive-card {
+    width: 18rem;
+    flex: 0 0 auto;
+
+    @media (min-width: 768px) {
+        width: 25rem;
+    }
+}
+
+// quantity button
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #aaa;
+    border-radius: 999px;
+    overflow: hidden;
+    width: 130px;
+    height: 40px;
+    background-color: transparent; /* ✅ transparent background */
+}
+
+.quantity-selector input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    background: transparent; /* ✅ input transparent */
+    font-size: 16px;
+    color: inherit; /* uses current text color */
+}
+
+.quantity-selector button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent; /* ✅ button transparent */
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: inherit; /* optional: inherit text color */
+}
+
+.quantity-selector button:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* subtle hover effect */
+}
+
+// end quantity button

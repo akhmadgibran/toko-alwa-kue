@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('category_id')->references('id')->on('product_categories');
+            $table->integer('category_id')->references('id')->on('product_categories')->onDelete('cascade');
             $table->integer('price');
             $table->string('image_path');
 
