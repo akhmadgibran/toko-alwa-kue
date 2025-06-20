@@ -15,7 +15,7 @@
                         <tr>
                             {{-- <th scope="col">No</th> --}}
                             <th scope="col">Item</th>
-                            {{-- <th scope="col">Harga</th> --}}
+                            <th scope="col">Harga</th>
                             <th scope="col" class="text-center">Jumlah</th>
                             <th scope="col">Subtotal</th>
                             {{-- <th scope="col">Aksi</th> --}}
@@ -24,8 +24,8 @@
                     <tbody>
                         @foreach ($adminOrderDetail as $Item)
                             <tr>
-                                <td>{{ $Item->product ? $Item->product->name : 'Product Not Found' }}</td>
-                                {{-- <td>Rp. {{ $Item->product->price }}</td> --}}
+                                <td>{{ $Item->product_name  }}</td>
+                                <td>Rp. {{ $Item->product_price }}</td>
                                 <td class="text-center">{{ $Item->quantity }}</td>
                                 <td>Rp. {{ number_format($Item->subtotal, 0, ',', '.') }}</td>
                             </tr>
@@ -57,6 +57,8 @@
                     <p>Kode Order :</p>
                     <p class="faded-border"> {{ $adminOrderItem->custom_order_id }}</p>
                     {{-- <p>Status : {{ $adminOrderItem->status }}</p> --}}
+                    <p>Nomor Telepon : </p>
+                    <p class="faded-border"> {{ $adminOrderItem->user->phone }} </p>
                     <p>Alamat : </p>
                     <p class="faded-border"> {{ $adminOrderItem->address }} </p>
                     <p>Catatan untuk penjual :</p>

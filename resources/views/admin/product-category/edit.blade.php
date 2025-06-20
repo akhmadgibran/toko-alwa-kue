@@ -22,6 +22,7 @@
                     <div class="form-group mt-2">
                         <label for="image">Image</label>
                         <input type="file" class="form-control-file" id="image" name="image">
+                        <p class="text-danger mb-0" style="font-size: 11px; mb-0">*ukuran file max 2MB</p>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Update</button>
                 </form>

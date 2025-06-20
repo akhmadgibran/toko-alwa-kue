@@ -3,7 +3,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style="height: 100vh;">
+    <div class="container" style="min-height: 100vh;">
         <h1 class="mt-4">Product Promotion Management</h1>
         <div class="d-flex flex-column algin-items-center">
             @if ($products->isEmpty())

@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row justify-content-center mt-5" style="height: 100vh;">
+<div class="row justify-content-center mt-5" style="min-height: 100vh;">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">Shop Status</div>

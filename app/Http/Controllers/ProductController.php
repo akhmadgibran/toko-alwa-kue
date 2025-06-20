@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function adminIndex()
     {
         // retrieve all product
-        $products = Product::simplePaginate(3);
+        $products = Product::simplePaginate(6);
 
         // pass products to view
         return view('admin.product.index', compact('products'));
@@ -25,7 +25,7 @@ class ProductController extends Controller
     public function index($id)
     {
         // retrieve data product by category id
-        $products = Product::where('category_id', $id)->simplePaginate(3);
+        $products = Product::where('category_id', $id)->simplePaginate(6);
 
         return view('products-page', compact('products'));
     }

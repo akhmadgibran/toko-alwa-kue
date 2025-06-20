@@ -84,6 +84,8 @@
                     <p> {{ $costumerOrderItem->custom_order_id }}</p>
                     
                     <p>Status : {{ $costumerOrderItem->status }}</p>
+                    <p>Nomor Telepon : </p>
+                    <p class="faded-border"> {{ $costumerOrderItem->user->phone }} </p>
                     <p>Alamat :</p>
                     <p class="faded-border">{{ $costumerOrderItem->address }}</p>
                     <p>Catatan dari penjual : </p>

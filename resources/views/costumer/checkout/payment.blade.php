@@ -23,9 +23,12 @@
   <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
   {{-- <script type="text/javascript" src="https://app.stg.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script> --}}
       <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+    <!--<script type="text/javascript"-->
+    <!--  src="https://app.midtrans.com/snap/snap.js"-->
+    <!--  data-client-key="{{ config('midtrans.client_key') }}"></script>-->
     <script type="text/javascript"
-      src="https://app.sandbox.midtrans.com/snap/snap.js"
-      data-client-key="{{ config('midtrans.client_key') }}"></script>
+    src="https://app.sandbox.midtrans.com/snap/snap.js" 
+    data-client-key="{{ config('midtrans.client_key') }}"></script>
     <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
 
        <script type="text/javascript">

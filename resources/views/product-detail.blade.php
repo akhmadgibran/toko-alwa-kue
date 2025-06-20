@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image" class="img-fluid">
+                <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image" class="img-fluid product-image-square">
             </div>
             <div class="col-md-6">
                 <h2 class="quote-script" >{{ $product->name }}</h2>
@@ -43,7 +43,10 @@
                             quantity = 1;
                         }
                         document.getElementById('quantity').value = quantity;
-                        document.getElementById('hidden-quantity').value = quantity;
+                        const hiddenQuantityInput = document.getElementById('hidden-quantity');
+                        if (hiddenQuantityInput) {
+                            hiddenQuantityInput.value = quantity;
+                        }
                         updateTotalPrice();
                     }
                 
@@ -54,17 +57,26 @@
                     }
                 </script>
                             
-            {{-- if not logged in, then add to cart button will route to login --}}
-            @if (!Auth::check() && $statusToko->name == 'close' || Auth::check() && $statusToko->name == 'closed')
-                <a href="#" class="btn bg-button-primer w-100 rounded-5 disabled">Add to Cart</a>
-            @elseif (Auth::check() && $statusToko->name == 'open')
-                <form action="{{ route('costumer.cart.store') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="hidden" name="quantity" id="hidden-quantity" value="1">
-                    <button type="submit" class="btn bg-button-primer w-100 rounded-5">Add to Cart</button>
-                </form>
-            @endif
+                    {{-- Cek kondisi toko dulu --}}
+                    @if ($statusToko->name == 'close' || $statusToko->name == 'closed')
+                        {{-- KASUS 1: TOKO TUTUP --}}
+                        <a href="#" class="btn bg-button-primer w-100 rounded-5 disabled">Toko Sedang Tutup</a>
+                    @else
+                        {{-- KASUS 2: TOKO BUKA, sekarang cek status login user --}}
+                        @auth
+                            {{-- User sudah login --}}
+                            <form action="{{ route('costumer.cart.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <input type="hidden" name="quantity" id="hidden-quantity" value="1">
+                                <button type="submit" class="btn bg-button-primer w-100 rounded-5">Add to Cart</button>
+                            </form>
+                        @else
+                            {{-- User belum login (guest) --}}
+                            <a href="{{ route('login') }}" class="btn bg-button-primer w-100 rounded-5">Login untuk Menambah ke
+                                Keranjang</a>
+                        @endauth
+                    @endif
             </div>
 
         </div>

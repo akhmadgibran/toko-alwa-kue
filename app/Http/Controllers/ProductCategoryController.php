@@ -14,7 +14,7 @@ class ProductCategoryController extends Controller
     public function adminIndex()
     {
         // retrieve all categories
-        $categories = ProductCategory::simplePaginate(3);
+        $categories = ProductCategory::simplePaginate(6);
 
         // pass categories to view
         return view('admin.product-category.index', compact('categories'));
@@ -23,7 +23,7 @@ class ProductCategoryController extends Controller
     // index for user
     public function index()
     {
-        $categories = ProductCategory::simplePaginate(3);
+        $categories = ProductCategory::simplePaginate(4);
 
         return view('product-categories-page', compact('categories'));
     }

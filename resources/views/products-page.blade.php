@@ -29,9 +29,9 @@
                         <div class="d-flex justify-content-center p-3">
                             <div class="bg-card-primer p-3 rounded-0 responsive-card" style="width: 18rem;">
                                 <img src="{{ asset('storage/' . $product->image_path) }}" alt=""
-                                    class="img-fluid shadow-md mb-2">
+                                    class="img-fluid shadow-md mb-2 product-image-square">
                                 <h4>{{ $product->name }}</h4>
-                                <p>{{ $product->description }}</p>
+                                <p>{{ Str::words($product->description, 4, '...') }}</p>
                                 <a href="{{ route('product.show', ['id' => $product->id]) }}"
                                     class="btn bg-button-primer w-100 rounded rounded-5">Lihat Product</a>
                             </div>

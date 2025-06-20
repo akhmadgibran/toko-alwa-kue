@@ -37,7 +37,7 @@
                         @if ($productPromotionId1->product != null)
                         <div class="p-3 rounded-0 bg-card-primer responsive-card" style="width: 18rem; flex: 0 0 auto;">
                             <div>
-                                <img src="{{ asset('storage/' . $productPromotionId1->product->image_path) }}" alt="" class="img-fluid shadow-md mb-2">
+                                <img src="{{ asset('storage/' . $productPromotionId1->product->image_path) }}" alt="" class="img-fluid shadow-md mb-2 product-image-square">
                                 <h4>{{ $productPromotionId1->product->name }}</h4>
                                 <p>Rp. {{ number_format($productPromotionId1->product->price, 0, ',', '.') }}</p>
                                 <a href="{{ route('product.show', $productPromotionId1->product_id) }}" class="btn bg-button-primer w-100 rounded rounded-5">Pilih produk</a>
@@ -49,7 +49,7 @@
                         @if ($productPromotionId2->product != null)
                             <div class="p-3 rounded-0 bg-card-primer responsive-card" style="width: 18rem; flex: 0 0 auto;">
                                 <div>
-                                    <img src="{{ asset('storage/' . $productPromotionId2->product->image_path) }}" alt="" class="img-fluid shadow-md mb-2">
+                                    <img src="{{ asset('storage/' . $productPromotionId2->product->image_path) }}" alt="" class="img-fluid shadow-md mb-2 product-image-square">
                                     <h4>{{ $productPromotionId2->product->name }}</h4>
                                     <p>Rp. {{ number_format($productPromotionId2->product->price, 0, ',', '.') }}</p>
                                     <a href="{{ route('product.show', $productPromotionId2->product_id) }}" class="btn bg-button-primer w-100 rounded rounded-5">Pilih produk</a>
@@ -61,7 +61,7 @@
                         @if ($productPromotionId3->product != null)
                             <div class="p-3 rounded-0 bg-card-primer responsive-card" style="width: 18rem; flex: 0 0 auto;">
                                 <div>
-                                    <img src="{{ asset('storage/' . $productPromotionId3->product->image_path) }}" alt="" class="img-fluid shadow-md mb-2">
+                                    <img src="{{ asset('storage/' . $productPromotionId3->product->image_path) }}" alt="" class="img-fluid shadow-md mb-2 product-image-square">
                                     <h4>{{ $productPromotionId3->product->name }}</h4>
                                     <p>Rp. {{ number_format($productPromotionId3->product->price, 0, ',', '.') }}</p>
                                     <a href="{{ route('product.show', $productPromotionId3->product_id) }}" class="btn bg-button-primer w-100 rounded rounded-5">Pilih produk</a>

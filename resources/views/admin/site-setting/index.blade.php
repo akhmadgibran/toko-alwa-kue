@@ -26,6 +26,7 @@
                 <div class="mb-3">
                     <label for="logo_path" class="form-label">Logo Toko</label>
                     <input type="file" class="form-control" id="logo_path" name="logo_path">
+                    <p class="text-danger mb-0" style="font-size: 11px; mb-0">*ukuran file max 2MB</p>
                     @if ($siteSettings->logo_path != null)
                         <div class="mt-2">
                             <img src="{{ asset('storage/' . $siteSettings->logo_path) }}" alt="Current Logo"
@@ -41,6 +42,7 @@
                 <div class="mb-3">
                     <label for="home_background_path" class="form-label">Home Background</label>
                     <input type="file" class="form-control" id="home_background_path" name="home_background_path">
+                    <p class="text-danger mb-0" style="font-size: 11px; mb-0">*ukuran file max 2MB</p>
                     @if ($siteSettings->home_background_path != null)
                         <div class="mt-2">
                             <img src="{{ asset('storage/' . $siteSettings->home_background_path) }}" alt="Current Logo"
@@ -56,6 +58,7 @@
                 <div class="mb-3">
                     <label for="about_banner_path" class="form-label">Foto About Banner</label>
                     <input type="file" class="form-control" id="about_banner_path" name="about_banner_path">
+                    <p class="text-danger mb-0" style="font-size: 11px; mb-0">*ukuran file max 2MB</p>
                     @if ($siteSettings->about_banner_path != null)
                         <div class="mt-2">
                             <img src="{{ asset('storage/' . $siteSettings->about_banner_path) }}" alt="Current Logo"

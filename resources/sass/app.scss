@@ -27,6 +27,12 @@
     background-color: #f5f4f4; /* A lighter shade of secondary */
 }
 
+.product-image-square {
+    width: 100%; /* Make the image fill its container's width */
+    aspect-ratio: 1 / 1; /* Enforce a 1:1 aspect ratio (a square) */
+    object-fit: cover; /* Cover the area, cropping the image to fit without distortion */
+}
+
 // end background color
 
 /* Add this to your CSS file */
