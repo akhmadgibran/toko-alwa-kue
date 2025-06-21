@@ -1,6 +1,6 @@
 # Proyek Toko Kue Alwa (`toko-alwa-kue`)
 
-Selamat datang di repository Toko Kue Alwa! Ini adalah aplikasi web pemesanan kue online yang dibangun menggunakan framework Laravel. Dokumen ini akan memandu Anda melalui proses instalasi, struktur project, dan cara berkontribusi.
+Selamat datang di repository Toko Kue Alwa! Ini adalah aplikasi web pemesanan kue online yang dibangun menggunakan framework Laravel.
 
 ## 1. Struktur Repository
 Struktur folder dan file pada project ini mengikuti standar framework Laravel. Berikut adalah deskripsi singkat dari beberapa direktori dan file yang paling penting:
